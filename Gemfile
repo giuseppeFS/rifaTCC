@@ -28,7 +28,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'jquery-rails'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 
 # Icones Material Design
 gem 'material_icons'
