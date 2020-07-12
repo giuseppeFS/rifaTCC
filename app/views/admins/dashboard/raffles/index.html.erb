@@ -1,0 +1,61 @@
+<h3 class="page-header">Campanhas</h3>
+
+<div class="col-md-12">
+	<div class="input-group data-table-search">
+		<input class="form-control" type="text" placeholder="Busca" aria-label="Search">
+		<div class="input-group-btn">
+			<button id="btnSearch" class="btn btn-default" type="button"><i class="material-icons">search</i></button>
+		</div>
+	</div>
+	<table id="raffleDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th class="th-sm">
+					Titulo
+				</th>
+				<th class="th-sm">
+					Categoria
+				</th>
+				<th class="th-sm">
+					Data Criaçao
+				</th>
+				<th class="th-sm">
+					Criador
+				</th>
+				<th class="th-sm">
+					Valor Ficha
+				</th>
+				<th class="th-sm">
+					Arrecadado
+				</th>
+				<th class="th-sm">
+					Objetivo
+				</th>
+				<th class="th-sm">
+					Data Finalizacao				
+				</th>
+				<th class="th-sm">
+
+				</th>
+				<th class="th-sm">
+
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @raffles.each do |raffle| %>
+			<tr>
+				<td><%= raffle.title %></td>
+				<td><%= raffle.category.description %></td>
+				<td><%= raffle.institution.corporate_name  %></td>
+				<td><%= raffle.unit_value %></td>
+				<td><%=  %></td>
+				<td><%= raffle.goal_value %></td>
+				<td><%= raffle.draw_date.strftime('%m/%d/%Y') %></td>
+				<td><%= link_to '<i class="material-icons">edit</i>'.html_safe, edit_admins_dashboard_raffle_path(raffle), :class => 'btn' %></td>
+				<td><%= link_to '<i class="material-icons">delete</i>'.html_safe, admins_dashboard_raffle_path(raffle),  method: :delete, data: {confirm: "Tem certeza que deseja excluir a campnha?"}, :class => 'btn' %></td>
+			</tr>
+			<% end %> 	
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,2 @@
+class ZipcodeRange < ApplicationRecord
+end

@@ -1,0 +1,19 @@
+<% if @user.errors.any? %>
+<h2> Erros ao criar novo usuario </h2>
+<ul>
+	<% @user.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</ul>
+<% end %>
+
+<%= form_for @user do |f| %>
+
+<%= f.label :email %>
+<%= f.label :password %>
+
+<%= f.submit %>
+
+<% end %>
+
+<%= link_to "Voltar", user_path %>

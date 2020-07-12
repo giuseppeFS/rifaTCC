@@ -1,0 +1,66 @@
+<h3 class="page-header">Instituicoes</h3>
+
+<div class="col-md-12">
+	<%= link_to 'Novo', new_institution_path, :class => 'btn btn-default' %>
+	<div class="input-group data-table-search">
+		<input class="form-control" type="text" placeholder="Busca" aria-label="Search">
+		<div class="input-group-btn">
+			<button id="btnSearch" class="btn btn-default" type="button"><i class="material-icons">search</i></button>
+		</div>
+	</div>
+	<table id="institutionDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th class="th-sm">
+					Razao Social
+				</th>
+				<th class="th-sm">
+					CNPJ
+				</th>
+				<th class="th-sm">
+					Telefone
+				</th>
+				<th class="th-sm">
+					Endereco
+				</th>
+				<th class="th-sm">
+					Cidade/UF
+				</th>
+				<th class="th-sm">
+					Data Cadastro
+				</th>
+				<th class="th-sm">
+					Email
+				</th>
+				<th class="th-sm">
+					Carteira				
+				</th>
+				<th class="th-sm">
+
+				</th>
+				<th class="th-sm">
+
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @institutions.each do |institution| %>
+			<tr>
+				<td><%= institution.social_reason %></td>
+				<td><%= CNPJ.new(institution.cnpj).formatted %></td>
+				<td><%= number_to_phone(institution.ddd_phone + institution.phone_number, area_code: true, pattern: /(\d{2})(\d{4})(\d{4})$/)  %></td>
+				<td><%= institution.address %></td>
+				<td><%= institution.number %></td>
+				<td><%= institution.created_at.strftime('%m/%d/%Y') %></td>
+				<td><%= institution.email %></td>
+				<td>R$ 100.00</td>
+				<td><%= link_to '<i class="material-icons">edit</i>'.html_safe, edit_institution_path(institution), :class => 'btn' %></td>
+				<td><%= link_to '<i class="material-icons">delete</i>'.html_safe, institutions_path(institution),  method: :delete, data: {confirm: "Tem certeza que deseja excluir o usuario?"}, :class => 'btn' %></td>
+			</tr>
+			<% end %> 	
+		</tbody>
+	</table>
+	<div align="center">
+		<%= will_paginate @institutions %>
+	</div>
+</div>

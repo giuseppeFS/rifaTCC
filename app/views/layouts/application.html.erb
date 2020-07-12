@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RifaAmigaApp</title>
+	<%= csrf_meta_tags %>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+	<div id="main" class="container-fluid">
+		<%= render 'layouts/navigation' %>
+		<%= render 'layouts/messages' %>
+		<%= yield %>
+		<%= render 'layouts/footer' %>
+	</div>
+</body>
+</html>

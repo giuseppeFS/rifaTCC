@@ -1,0 +1,127 @@
+<% if @institution.errors.any? %>
+<h2> Erros ao criar novo usuario </h2>
+<ul>
+	<% @institution.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</ul>
+<% end %>
+
+<%= form_for @institution do |f| %>
+
+
+<%= f.label :cnpj %>
+<div class="input-group">
+	<%= f.text_field :cnpj, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :email %>
+<div class="input-group">
+	<%= f.email_field :email, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :password %>
+<div class="input-group">
+	<%= f.password_field :password, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :corporate_name %>
+<div class="input-group">
+	<%= f.text_field :corporate_name, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :social_reason %>
+<div class="input-group">
+	<%= f.text_field :social_reason, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :address %>
+<div class="input-group">
+	<%= f.text_field :address, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :number %>
+<div class="input-group">
+	<%= f.number_field :number, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :complement %>
+<div class="input-group">
+	<%= f.text_field :complement, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :neighborhood %>
+<div class="input-group">
+	<%= f.text_field :neighborhood, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :zipCode %>
+<div class="input-group">
+	<%= f.number_field :zipCode, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :ddd_phone %>
+<div class="input-group">
+	<%= f.number_field :ddd_phone, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :phone_number %>
+<div class="input-group">
+	<%= f.number_field :phone_number, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :ddd_phone2 %>
+<div class="input-group">
+	<%= f.number_field :ddd_phone2, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :phone_number2 %>
+<div class="input-group">
+	<%= f.number_field :phone_number2, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :bank_number %>
+<div class="input-group">
+	<%= f.number_field :bank_number, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :agency_number %>
+<div class="input-group">
+	<%= f.number_field :agency_number, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :account_number %>
+<div class="input-group">
+	<%= f.number_field :account_number, :class => 'form_control' %>
+</div>
+
+
+<%= f.label :qualification %>
+<div class="input-group">
+	<%= f.text_field :qualification, :class => 'form_control' %>
+</div>
+
+<%= f.label :about %>
+<div class="input-group">
+	<%= f.text_field :about, :class => 'form_control' %>
+</div>
+
+<%= f.submit %>
+
+<% end %>

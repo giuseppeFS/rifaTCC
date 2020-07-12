@@ -1,0 +1,86 @@
+<style type="text/css">
+#boleto { position: relative; width: 640px; }
+* { font-family: sans; font-size: 11px; }
+#codigo-barras, #elementos * { position: absolute; }
+.logo1 { left: 0; top: 1px; }
+.logo2 { left: 0; top: 200px; }
+.banco1, .banco2 { font-weight: bold; font-size: 20px; }
+.linha-digitavel1, .linhadigitavel2 { font-weight: bold; font-size: 13px; top: 210px; right: 0; }
+.linha2 { top: 43px; }
+.linha3 { top: 66px; }
+.linha4 { top: 89px; left: 10px; }
+.linha5 { top: 110px; }
+.linha6 { top: 131px; }
+.linha7 { top: 243px; }
+.linha8 { top: 264px; }
+.linha9 { top: 287px; }
+.linha10 { top: 309px; }
+.linha11 { top: 338px; }
+.linha12 { top: 353px; }
+.linha13 { top: 368px; }
+.linha14 { top: 383px; }
+.linha15 { top: 398px; }
+.linha16 { top: 443px; }
+.linha17 { top: 456px; }
+.linha18 { top: 469px; }
+.banco1 { top: 7px; left: 173px; }
+.banco2 { top: 205px; left: 173px; }
+.documento-cedente1 { right: 180px; }
+.documento-cedente2 { right: 180px; }
+.vencimento1, .vencimento2 { right: 0; }
+.numero-documento1 { left: 160px; }
+.numero-documento2 { left: 110px; }
+.especie-documento1 { left: 330px; }
+.especie-documento2 { left: 280px; }
+.data-documento1 { left: 395px; }
+.agencia-codigo-cedente1, .agencia-codigo-cedente2 { right: 0 }
+.aceite { left: 360px; }
+.nosso-numero2 { right: 0; }
+.carteira { left: 110px; }
+.especie-moeda { left: 180px; }
+.valor2 { right: 0; }
+#codigo-barras { bottom: 35px; }
+</style>
+<div id="boleto">
+	<%= image_tag 'boleto/layout.gif' %>
+	<div id="elementos">
+		<%= image_tag "boleto/#{@boleto.banco}.gif", :class => "logo1" %>
+		<%= image_tag "boleto/#{@boleto.banco}.gif", :class => "logo2" %>
+		<span class="banco1"><%= "#{@boleto.banco}-#{@boleto.banco_dv}" %></span>
+		<span class="banco2"><%= "#{@boleto.banco}-#{@boleto.banco_dv}" %></span>
+		<span class="linha-digitavel1"><%= "#{@boleto.linha_digitavel[0,5]}.#{@boleto.linha_digitavel[5,5]} #{@boleto.linha_digitavel[10,5]}.#{@boleto.linha_digitavel[15,6]} #{@boleto.linha_digitavel[21,5]}.#{@boleto.linha_digitavel[26,6]} #{@boleto.linha_digitavel[32,1]} #{@boleto.linha_digitavel[33,44]}" %></span>
+		<span class="cedente1 linha2"><%= "#{@boleto.cedente}" %></span>
+		<span class="documento-cedente1 linha2"><%= "#{@boleto.documento_cedente}" %></span>
+		<span class="vencimento1 linha2"><%= "#{@boleto.data_vencimento.strftime('%d/%m/%Y')}" %></span>
+		<span class="nosso-numero1 linha3"><%= "#{@boleto.nosso_numero}" %></span>
+		<span class="numero-documento1 linha3"><%= "#{@boleto.numero_documento}" %></span>
+		<span class="especie-documento1 linha3"><%= "#{@boleto.especie_documento}" %></span>
+		<span class="data-documento1 linha3"><%= "#{@boleto.data_documento.strftime('%d/%m/%Y')}" %></span>
+		<span class="agencia-codigo-cedente1 linha3"><%= "#{@boleto.agencia}/#{@boleto.conta_corrente}-#{@boleto.conta_corrente_dv}" %></span>
+		<span class="valor1 linha4"><%= "#{@boleto.valor_formatado}" %></span>
+		<span class="sacado1 linha5"><%= "#{@boleto.sacado}" %></span>
+		<span class="instrucao1 linha6"><%= "#{@boleto.instrucao1}" %></span>
+		<span class="local-pagamento1 linha7"><%= "#{@boleto.local_pagamento}" %></span>
+		<span class="vencimento2 linha7"><%= "#{@boleto.data_vencimento.strftime('%d/%m/%Y')}" %></span>
+		<span class="cedente2 linha8"><%= "#{@boleto.cedente}" %></span>
+		<span class="documento-cedente2 linha8"><%= "#{@boleto.documento_cedente}" %></span>
+		<span class="agencia-codigo-cedente2 linha8"><%= "#{@boleto.agencia}/#{@boleto.conta_corrente}-#{@boleto.conta_corrente_dv}" %></span>
+		<span class="data-documento2 linha9"><%= "#{@boleto.data_documento.strftime('%d/%m/%Y')}" %></span>
+		<span class="numero-documento2 linha9"><%= "#{@boleto.numero_documento}" %></span>
+		<span class="especie-documento2 linha9"><%= "#{@boleto.especie_documento}" %></span>
+		<span class="aceite linha9"><%= "#{@boleto.aceite}" %></span>
+		<span class="nosso-numero2 linha9"><%= "#{@boleto.nosso_numero}" %></span>
+		<span class="carteira linha10"><%= "#{@boleto.carteira}" %></span>
+		<span class="especie-moeda linha10">R$</span>
+		<span class="valor2 linha10"><%= "#{@boleto.valor_formatado}" %></span>
+		<span class="linha11"><%= "#{@boleto.instrucao2}" %></span>
+		<span class="linha12"><%= "#{@boleto.instrucao3}" %></span>
+		<span class="linha13"><%= "#{@boleto.instrucao4}" %></span>
+		<span class="linha14"><%= "#{@boleto.instrucao5}" %></span>
+		<span class="linha15"><%= "#{@boleto.instrucao6}" %></span>
+		<span class="linha16"><%= "#{@boleto.sacado_linha1}" %></span>
+		<span class="linha17"><%= "#{@boleto.sacado_linha2}" %></span>
+		<span class="linha18"><%= "#{@boleto.sacado_linha3}" %></span>
+	</div>
+	<div id="codigo-barras"><%= @boleto.codigo_barras %></div>
+</div>

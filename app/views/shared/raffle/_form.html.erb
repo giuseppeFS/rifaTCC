@@ -1,0 +1,64 @@
+<% if @raffle.errors.any? %>
+<h2> Erros ao criar campanha </h2>
+<ul>
+	<% @raffle.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</ul>
+<% end %>
+
+<%= form_for @raffle do |f| %>
+
+<%= f.label :cnpj %>
+<div class="input-group">
+	<%= f.text_field :cnpj, :class => 'form_control' %>
+</div>
+
+<%= f.label :title %>
+<div class="input-group">
+	<%= f.text_field :title, :class => 'form_control' %>
+</div>
+
+<%= f.label :description %>
+<div class="input-group">
+	<%= f.text_field :description, :class => 'form_control' %>
+</div>
+
+<%= f.label :draw_date %>
+<div class="input-group">
+	<%= f.text_field :draw_date, :class => 'form_control' %>
+</div>
+
+<%= f.label :unit_value %>
+<div class="input-group">
+	<%= f.text_field :unit_value, :class => 'form_control' %>
+</div>
+
+<%= f.label :goal_value %>
+<div class="input-group">
+	<%= f.text_field :goal_value, :class => 'form_control' %>
+</div>
+
+<%= f.label :delivery %>
+<div class="input-group">
+	<%= f.text_field :delivery, :class => 'form_control' %>
+</div>
+
+<%= f.label :condition %>
+<div class="input-group">
+	<%= f.text_field :condition, :class => 'form_control' %>
+</div>
+
+<%= f.label :prize %>
+<div class="input-group">
+	<%= f.text_field :prize, :class => 'form_control' %>
+</div>
+
+<%= f.label :prize_description %>
+<div class="input-group">
+	<%= f.text_field :prize_description, :class => 'form_control' %>
+</div>
+
+<%= f.submit %>
+
+<% end %>

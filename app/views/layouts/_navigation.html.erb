@@ -1,0 +1,9 @@
+<% if controller_path.include? 'admins/dashboard' %>
+	<%= render 'layouts/admin_navigation' %>
+<% elsif controller_path.include? 'institutions/dashboard' %>
+	<%= render 'layouts/institution_navigation' %>
+<% elsif controller_path.include? 'users/dashboard' %>
+	<%= render 'layouts/user_navigation' %>
+<% else %>
+	<%= render 'layouts/main_navigation' %>
+<% end %>

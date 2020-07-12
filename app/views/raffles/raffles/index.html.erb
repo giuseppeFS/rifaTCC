@@ -1,0 +1,62 @@
+<h3 class="page-header">Usuarios</h3>
+
+<div class="col-md-12">
+	<div class="col-md-1"> 
+		<h4>Filtros</h4>
+	</div>
+	<div class="col-md-11">
+		<input class="form-control data-table-search" type="text" placeholder="Search" aria-label="Search">
+		<table id="userDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th class="th-sm">
+						Nome
+					</th>
+					<th class="th-sm">
+						CPF
+					</th>
+					<th class="th-sm">
+						Telefone
+					</th>
+					<th class="th-sm">
+						Endereco
+					</th>
+					<th class="th-sm">
+						Cidade/UF
+					</th>
+					<th class="th-sm">
+						Data Cadastro
+					</th>
+					<th class="th-sm">
+						Email
+					</th>
+					<th class="th-sm">
+						Carteira					
+					</th>
+					<th class="th-sm">
+						
+					</th>
+					<th class="th-sm">
+						
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @raffles.each do |user| %>
+				<tr>
+					<td><%= user.name %></td>
+					<td><%= user.cpf %></td>
+					<td><%= "(" + user.ddd_phone + ") " + user.phone_number  %></td>
+					<td><%= user.address %></td>
+					<td><%= user.number %></td>
+					<td><%= user.created_at %></td>
+					<td><%= user.email %></td>
+					<td>100.00</td>
+					<td><%= link_to "Alterar", edit_user_path(user) %></td>
+					<td><%= link_to "Delete", raffles_path(user), method: :delete, data: {confirm: "Tem certeza que deseja excluir o usuario?"} %></td>
+				</tr>
+				<% end %> 	
+			</tbody>
+		</div>
+	</table>
+</div>
