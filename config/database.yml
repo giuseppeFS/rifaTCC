@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: utf8
   database: rifaAmigaDB
-  username: postgres
-  password: "postgres"
+  username: giuseppe
+  password: "giuseppe"
   host: 127.0.0.1
   port: 5432
 
@@ -16,7 +16,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rifaAmigaDB_test
+  database: rifaAmigaDB
 
 production:
   <<: *default

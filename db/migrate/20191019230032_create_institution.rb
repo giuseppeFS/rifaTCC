@@ -1,16 +1,17 @@
 class CreateInstitution < ActiveRecord::Migration[5.1]
   def change
     create_table  :institutions do |t|
-    	t.string  :cnpj
+      	t.string  :cnpj
         t.string  :email
         t.string  :encrypted_password
-    	t.string  :corporate_name
+      	t.string  :corporate_name
         t.string  :social_reason
         t.string  :address
         t.string  :number
         t.string  :complement
         t.string  :neighborhood
         t.string  :zipCode
+        t.integer :city_id
         t.string  :ddd_phone
         t.string  :phone_number
         t.string  :ddd_phone2
@@ -18,7 +19,7 @@ class CreateInstitution < ActiveRecord::Migration[5.1]
         t.integer :bank_number
         t.integer :agency_number
         t.integer :account_number
-    	t.string  :qualification
+    	  t.string  :qualification
         t.string  :about
         t.float   :rating
         t.boolean :status, default: false

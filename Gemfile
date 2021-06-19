@@ -20,10 +20,6 @@ gem 'devise'
 # Pundit Autorizacoes/Politica de uso
 gem 'pundit'
 
-# Paginacao para listagem
-gem 'will_paginate', '3.1.5'
-gem 'bootstrap-will_paginate', '1.0.0'
-
 # Jquery gem
 gem 'jquery-rails'
 
@@ -35,7 +31,10 @@ gem 'material_icons'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+gem 'bootstrap', '~> 5.0.1'
+
+# Paginacao para listagem
+gem 'will_paginate-bootstrap4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

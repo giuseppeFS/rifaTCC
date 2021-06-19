@@ -6,8 +6,7 @@ class CreateTicket < ActiveRecord::Migration[5.1]
     	t.integer  :owner_id
     	t.datetime :purchase_date
     	t.float    :value
-
-        t.timestamps
+      t.timestamps
     end
   end
 end
