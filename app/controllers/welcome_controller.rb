@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
 		render "sign_in"
 	end
 
-	def access
+	def access_user
 		cgc = login_params[:cgc]
 		password = login_params[:password]
 
@@ -21,11 +21,20 @@ class WelcomeController < ApplicationController
 					redirect_to root_path
 				end
 			else
-				flash[:danger] = "CPF/CNPJ nao cadastrado ou senha invalida"
+				flash[:danger] = "CPF não cadastrado ou senha inválida"
 				redirect_back(fallback_location: sign_in_path)
 			end
+		else
+			flash[:danger] = "CPF Inválido"
+			redirect_back(fallback_location: sign_in_path)
+		end 
+	end
+
+	def access_institution
+		cgc = login_params[:cgc]
+		password = login_params[:password]
 			
-		elsif (CNPJ.valid?(login_params[:cgc]))
+		if (CNPJ.valid?(login_params[:cgc]))
 			@institution = Institution.find_by(cnpj: login_params[:cgc])
 
 			if !@institution.nil? 
@@ -34,12 +43,11 @@ class WelcomeController < ApplicationController
 					redirect_to root_path
 				end
 			else
-				flash[:danger] = "CNPJ nao cadastrado ou senha invalida"
+				flash[:danger] = "CNPJ nao cadastrado ou senha inválida"
 				redirect_back(fallback_location: sign_in_path)
 			end
-
 		else
-			flash[:danger] = "CPF/CNPJ Invalido"
+			flash[:danger] = "CNPJ Inválido"
 			redirect_back(fallback_location: sign_in_path)
 		end 
 	end

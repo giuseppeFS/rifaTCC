@@ -13,31 +13,53 @@ footer {
   width: 100%;
 }
 
-.login-wrap{
-  padding: 15px;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  margin: 0 auto;
-  background: #ecf0f1;
-  box-shadow: 3px 3px 10px #333;
-  width: 350px;
-  border-radius: 5px;
-}
-
 .data-table-search {
 	width: 18em;
 	margin-bottom: 1em;
 	float: right;
 }
 
-#navbar_main {
-	background-color: #1a7a00
+#pessoaFisicaLogin {
+background: rgb(254,217,155);
+background: linear-gradient(0deg, rgba(254,217,155,1) 0%, rgba(254,217,155,1) 35%, rgba(254,217,155,1) 100%);
 }
 
-.navbar-brand {
-	color: #d19c1d
+#InstituicaoLogin {
+background: rgb(254,101,79);
+background: linear-gradient(0deg, rgba(254,101,79,1) 0%, rgba(254,101,79,1) 35%, rgba(254,101,79,1) 100%);
+}
+
+#navbar {
+background: rgb(254,209,140);
+background: linear-gradient(0deg, rgba(254,209,140,1) 0%, rgba(254,209,140,1) 35%, rgba(254,209,140,1) 100%);
+}
+
+.page-title {
+	padding-top: 1em; 
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 50vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.square:after{
+    content: "";
+    display: block;
+    padding-top: 15%;  /* initial ratio of 1:1*/
+}
+
+.square:before{
+    content: "";
+    display: block;
+    padding-top: 15%;  /* initial ratio of 1:1*/
+}
+
+.btn-submit {
+	background: #AA8774;
+	color: white;
+	width: 80%;
 }

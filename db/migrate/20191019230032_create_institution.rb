@@ -44,9 +44,9 @@ class CreateInstitution < ActiveRecord::Migration[5.1]
         t.datetime :confirmation_sent_at
         t.string   :unconfirmed_email # Only if using reconfirmable
 
-    	# Colunas padrao do rails
-    	t.datetime :created_at
-    	t.datetime :updated_at
+    	  # Colunas padrao do rails
+    	  t.datetime :created_at
+    	  t.datetime :updated_at
     end
   end
 end

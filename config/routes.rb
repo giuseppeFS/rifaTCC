@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   # General routes to the app
   get  'sign_in', to: 'welcome#log_in'
-  post 'sign_in', to: 'welcome#access'
+  post 'sign_in_user', to: 'welcome#access_user'
+  post 'sign_in_institution', to: 'welcome#access_institution'
 
   #
   # Users scope rounting
