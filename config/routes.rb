@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 
       get 'raffles',                action: :index,                 controller: 'raffles'
 
-      get 'financial',                action: :index,                 controller: 'financial'
+      get 'financial',              action: :index,                 controller: 'financial'
 
       get 'withdraws',              action: :index,                 controller: 'withdraws'
 

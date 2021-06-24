@@ -293,4 +293,4 @@ user_list = [
 
               end
 
-              Admin.create(:email => 'rifaamiga@institucional.com', :password => '123456')
+              Admin.create(:email => 'institucional@rifaamiga.com', :password => '123456')

@@ -2,25 +2,39 @@
 //@import "bootstrap-sprockets";
 @import "bootstrap";
 
-body { 
-	padding-top: 2em; 
+$body-background-color: #d9d9d9;
+$body-background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+
+$orange-background-color: rgb(254,209,140);;
+$tomato-background-color: rgb(254,101,79);
+
+body {
+background-color: $body-background-color;
+background-image: $body-background-image;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+width: 100%;
+height:100vh;  /* responsive height */
+padding-top: 8em;
 }
 
 footer {
-  position: fixed;
-  height: 100px;
-  bottom: 0;
-  width: 100%;
+position: fixed;
+height: 100px;
+bottom: 0;
+width: 100%;
 }
 
 .data-table-search {
-	width: 18em;
-	margin-bottom: 1em;
-	float: right;
+width: 18em;
+margin-bottom: 1em;
+float: right;
 }
 
 #pessoaFisicaLogin {
-background: rgb(254,217,155);
+background: $tomato-background-color;
 background: linear-gradient(0deg, rgba(254,217,155,1) 0%, rgba(254,217,155,1) 35%, rgba(254,217,155,1) 100%);
 }
 
@@ -30,36 +44,67 @@ background: linear-gradient(0deg, rgba(254,101,79,1) 0%, rgba(254,101,79,1) 35%,
 }
 
 #navbar {
-background: rgb(254,209,140);
+background: $orange-background-color;
 background: linear-gradient(0deg, rgba(254,209,140,1) 0%, rgba(254,209,140,1) 35%, rgba(254,209,140,1) 100%);
 }
 
-.page-title {
-	padding-top: 1em; 
-}
-
 .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 50vh; /* These two lines are counted as one :-)       */
+min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+min-height: 50vh; /* These two lines are counted as one :-)       */
 
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .square:after{
-    content: "";
-    display: block;
-    padding-top: 15%;  /* initial ratio of 1:1*/
+content: "";
+display: block;
+padding-top: 15%;  /* initial ratio of 1:1*/
 }
 
 .square:before{
-    content: "";
-    display: block;
-    padding-top: 15%;  /* initial ratio of 1:1*/
+content: "";
+display: block;
+padding-top: 15%;  /* initial ratio of 1:1*/
 }
 
 .btn-submit {
-	background: #AA8774;
-	color: white;
-	width: 80%;
+background: #AA8774;
+color: white;
+width: 80%;
+}
+
+.btn-submit-adm {
+background: #AA8774;
+color: white;
+width: 100%;
+}
+
+.btn-action {
+background: #AA8774;
+color: white;
+}
+
+.sub-group-form {
+margin-top: 1em;
+background: $orange-background-color;
+}
+
+.rmb-1{
+  margin-bottom: 0vh;
+}
+
+#main_admin table thead{
+background-color: #2f2f2f;
+color: white;
+}
+
+#main_admin table thead th{
+border-left: 0;
+border-right: 0;
+}
+
+#main_admin table tbody td{
+border-left: 0;
+border-right: 0;
 }

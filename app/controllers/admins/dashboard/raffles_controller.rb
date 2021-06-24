@@ -3,6 +3,7 @@ class Admins::Dashboard::RafflesController < ApplicationController
 
 	def index
 	  @raffles = Raffle.all
+	  @raffles = Raffle.paginate(page: params[:page], per_page: 1)
 	end
 
 	def new

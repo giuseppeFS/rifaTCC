@@ -1,29 +1,26 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
- <div class="container-fluid">
-  <div class="navbar-header">
-   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="navbar-brand" href=<%= admins_dashboard_users_path %>>Rifa Amiga</a>
-</div>
-<div id="navbar" class="navbar-collapse collapse">
- <ul class="nav navbar-nav navbar-left">
-  <li><a href=<%= admins_dashboard_users_path %>>Usuario</a></li>
-  <li><a href=<%= admins_dashboard_institutions_path %>>Instituicao</a></li>
-  <li><a href=<%= admins_dashboard_raffles_path %>>Campanhas</a></li>
-  <li><a href=<%= admins_dashboard_financial_path %>>Financeiro</a></li>
-  <li><a href=<%= admins_dashboard_institutions_approval_path %>>Cadastros Pendentes</a></li>
-  <li><a href=<%= admins_dashboard_withdraws_path %>>Saques Pendentes</a></li>
-  <li><a href=<%= admins_dashboard_reports_path %>>Relatorios</a></li>
-  <% if admin_signed_in? %>
-  <ul class="nav navbar-nav navbar-right">
-    <li><%= link_to('Sair', destroy_admin_session_path, method: :delete) %></li>
-  </ul>
-  <% end %>
-</ul>
-</div>
-</div>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/assets/rifa_amiga_logo.png" alt="" width="70" height="70">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-lg-1 justified">
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('users')%>" href=<%= admins_dashboard_users_path %>>Usuário</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('institutions')%>" href=<%= admins_dashboard_institutions_path %>>Instituição</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('raffles')%>" href=<%= admins_dashboard_raffles_path %>>Campanhas</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('financial')%>" href=<%= admins_dashboard_financial_path %>>Financeiro</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('institutions_approval')%>" href=<%= admins_dashboard_institutions_approval_path %>>Cadastros Pendentes</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('withdraws')%>" href=<%= admins_dashboard_withdraws_path %>>Saques Pendentes</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('reports')%>" href=<%= admins_dashboard_reports_path %>>Relatorios</a></li>
+      </ul>
+        <% if admin_signed_in? %>
+        <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+          <li class="nav-item"><span class="material-icons">logout<%= link_to('', destroy_admin_session_path, method: :delete, class: "nav-link active") %></span></li>
+        </ul>
+        <% end %>
+    </div>
+  </div>
 </nav>
