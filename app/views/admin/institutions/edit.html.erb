@@ -1,0 +1,6 @@
+<div class="row">
+	<h1 class="text-center">Alterando Instituição</h1>
+</div>
+<div class="row">
+    <%= render partial: 'shared/institution/form', locals: {model: @institution, url: admin_institution_path(@institution), form_back_page: admin_institutions_path, form_is_edit: true} %>
+</div>

@@ -25,6 +25,17 @@ bottom: 0;
 width: 100%;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .data-table-search {
 width: 18em;
 margin-bottom: 1em;
@@ -64,6 +75,10 @@ padding-top: 15%;  /* initial ratio of 1:1*/
 content: "";
 display: block;
 padding-top: 15%;  /* initial ratio of 1:1*/
+}
+
+.error-panel {
+  background: $tomato-background-color;
 }
 
 .btn-submit {

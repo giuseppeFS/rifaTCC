@@ -1,7 +1,12 @@
 class Institution < ApplicationRecord
   before_save { self.email = email.downcase }
 
-  devise :database_authenticatable
+  devise :database_authenticatable,
+         :registerable, 
+         :recoverable, 
+         :rememberable, 
+         :trackable,
+         :validatable
 
   validates :cnpj, presence: true, 
                    uniqueness: true
@@ -11,9 +16,19 @@ class Institution < ApplicationRecord
   validates :corporate_name, presence: true,
 						                 length: { maximum: 100 }
 
-  # validates :qualification
+  validates :address, presence: true, 
+                      length: { maximum: 100 }
 
-  # validates :state_registration
+  validates :number, presence: true, 
+                     length: { maximum: 6 }
+
+  validates :complement, length: { maximum: 50 }
+
+  validates :neighborhood, presence: true, 
+                           length: { maximum: 50}  
+
+  validates :zipCode, presence: true, 
+                      length: { maximum: 8 }
 
   private
 

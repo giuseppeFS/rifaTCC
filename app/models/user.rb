@@ -1,7 +1,12 @@
 class User < ApplicationRecord
   has_one :wallet
 
-  devise :database_authenticatable
+  devise :database_authenticatable,
+         :registerable, 
+         :recoverable, 
+         :rememberable, 
+         :trackable,
+         :validatable
 
   before_save { 
     self.email = email.downcase

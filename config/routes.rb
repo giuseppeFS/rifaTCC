@@ -1,21 +1,61 @@
 Rails.application.routes.draw do
 
-  # General routes to the app
-  get  'sign_in', to: 'welcome#log_in'
-  post 'sign_in_user', to: 'welcome#access_user'
-  post 'sign_in_institution', to: 'welcome#access_institution'
+  #
+  # Devise for Admin Authentication
+  #
+  devise_for :admins, path: 'admin', controllers: {sessions: "admin/sessions", passwords: "admin/passwords", registrations: "admin/registrations"}
 
   #
-  # Users scope rounting
-  # Devise
+  # Admin area rounting
+  #
+  namespace :admin do
+
+    #
+    # Admins Root
+    #
+    root :to => 'users#index' 
+
+    resources :users, only: [:index, :destroy, :show, :new, :create, :update, :edit]
+
+    resources :institutions, only: [:index, :destroy, :show, :new, :create, :update, :edit]
+
+    resources :raffles, only: [:show, :edit, :destroy]
+      
+    get 'institutions_approval',  action: :institutions_approval, controller: 'institutions'
+    get 'aprove_institution/:id', action: :aprove_institution,    controller: 'institutions', as: 'approve_institution'
+
+    get 'raffles',                action: :index,                 controller: 'raffles'
+
+    get 'financial',              action: :index,                 controller: 'financial'
+
+    get 'withdraws',              action: :index,                 controller: 'withdraws'
+
+    get 'reports',                action: :reports,               controller: 'reports'
+
+  end
+
+  #
+  # Devise for Users Authentication
+  #
   devise_for :users, path: 'user', controllers: { sessions: "users/sessions", passwords: "users/passwords", registrations: "users/registrations"}
 
+  #
+  # User acess routes
+  #
   scope module: 'users' do
     resources :users
   end
   
   namespace :users do
+
+    #
+    # User root
+    #
     root :to => 'dashboard/users#profile' 
+
+    #
+    # User profile actions
+    #
     namespace :dashboard do
       root :to => 'users#profile'
 
@@ -25,42 +65,9 @@ Rails.application.routes.draw do
   end
 
   #
-  # Admin scope rounting
-  # Devise
-  devise_for :admins, path: 'admin', controllers: { sessions: "admins/sessions", passwords: "admins/passwords", registrations: "admins/registrations"}
-
-  # Admin Root
-  namespace :admins do
-    root :to => 'dashboard/users#index' 
-    namespace :dashboard do
-      root :to => 'users#index'
-
-      resources :users
-
-      resources :institutions
-
-      resources :raffles, only: [:show, :edit, :destroy]
-
-      # get 'users',                  action: :index,                 controller: 'users'
-      # get 'institutions',           action: :index,                 controller: 'institutions'
-      
-      get 'institutions_approval',  action: :institutions_approval, controller: 'institutions'
-      get 'aprove_institution/:id', action: :aprove_institution,    controller: 'institutions', as: 'approve_institution'
-
-      get 'raffles',                action: :index,                 controller: 'raffles'
-
-      get 'financial',              action: :index,                 controller: 'financial'
-
-      get 'withdraws',              action: :index,                 controller: 'withdraws'
-
-      get 'reports',                action: :reports,               controller: 'reports'
-    end
-  end
-
-  # Institutions scope rounting
-  # Devise
+  # Devise for Institutions Authentication
+  #
   devise_for :institutions, path: 'institutions', controllers: { sessions: "institutions/sessions", passwords: "institutions/passwords", registrations: "institutions/registrations"}
-
 
   scope module: 'institutions' do
     resources :institutions
@@ -68,8 +75,10 @@ Rails.application.routes.draw do
 
   # Admin Root
   namespace :institutions do
-    root :to => 'dashboard/institutions#profile'
     namespace :dashboard do
+      #
+      # Intitutions root
+      #
       root :to => 'dashboard/institutions#profile'
 
       resources :raffles
@@ -82,8 +91,16 @@ Rails.application.routes.draw do
     end
   end
 
+  #
+  # Open routes to the app
+  #
+  get  'sign_in', to: 'welcome#log_in'
+  post 'sign_in_user', to: 'welcome#access_user'
+  post 'sign_in_institution', to: 'welcome#access_institution'
 
-  # End with application root
+  #
+  # Main App Page
+  #
   root :to => "welcome#home"
 
 end

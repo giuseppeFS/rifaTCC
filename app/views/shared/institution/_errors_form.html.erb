@@ -1,0 +1,16 @@
+<div class="col-md-3 mt-3">
+	<% if model.errors.any? %>
+	<div class="error-panel p-3">
+		<% if form_is_edit %>
+		<h5> Erros ao alterar Instituição </h5>
+		<% else %>
+		<h5> Erros ao criar Instituição </h5>
+		<% end %>
+		<ul>
+			<% model.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+</div>

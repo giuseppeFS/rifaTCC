@@ -1,18 +1,39 @@
 class Users::UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :update, :show, :destroy]
 
-	def profile
+	#
+	# Shared Actions
+	#
+	def new
+		@user = User.new
+	end
+
+	def create
+		@user = User.new(user_params)
 		authorize User
+
+		if @user.save
+			flash[:sucess] = "Usuario criado com sucesso"
+		end
+
+		redirect_to users_profile_path(@user)
 	end
 
 	def update
 		authorize @user
+		
 		if @user.update(user_params)
 			flash[:sucess] = "Usuario atualizado com sucesso"
-			redirect_to users_path(@user)
-		else
-			render 'edit'
 		end
+
+		redirect_to users_profile_path(@user)
+	end
+
+	#
+	# User only actions
+	#
+	def profile
+		authorize User
 	end
 
 	private

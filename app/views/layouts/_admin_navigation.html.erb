@@ -8,17 +8,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-lg-1 justified">
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('users')%>" href=<%= admins_dashboard_users_path %>>Usuário</a></li>
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('institutions')%>" href=<%= admins_dashboard_institutions_path %>>Instituição</a></li>
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('raffles')%>" href=<%= admins_dashboard_raffles_path %>>Campanhas</a></li>
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('financial')%>" href=<%= admins_dashboard_financial_path %>>Financeiro</a></li>
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('institutions_approval')%>" href=<%= admins_dashboard_institutions_approval_path %>>Cadastros Pendentes</a></li>
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('withdraws')%>" href=<%= admins_dashboard_withdraws_path %>>Saques Pendentes</a></li>
-        <li class="nav-item pe-3"><a class="nav-link <%= is_active('reports')%>" href=<%= admins_dashboard_reports_path %>>Relatorios</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('users')%>" href=<%= admin_users_path %>>Usuário</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('institutions')%>" href=<%= admin_institutions_path %>>Instituição</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('raffles')%>" href=<%= admin_raffles_path %>>Campanhas</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('financial')%>" href=<%= admin_financial_path %>>Financeiro</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('institutions_approval')%>" href=<%= admin_institutions_approval_path %>>Cadastros Pendentes</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('withdraws')%>" href=<%= admin_withdraws_path %>>Saques Pendentes</a></li>
+        <li class="nav-item pe-3"><a class="nav-link <%= is_active('reports')%>" href=<%= admin_reports_path %>>Relatorios</a></li>
       </ul>
         <% if admin_signed_in? %>
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-          <li class="nav-item"><span class="material-icons">logout<%= link_to('', destroy_admin_session_path, method: :delete, class: "nav-link active") %></span></li>
+          <li class="nav-item"><%= link_to('logout', destroy_admin_session_path, method: :delete, class: "nav-link active material-icons") %></li>
         </ul>
         <% end %>
     </div>

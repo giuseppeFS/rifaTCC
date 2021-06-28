@@ -1,0 +1,16 @@
+<div class="col-md-3 mt-3">
+	<% if model.errors.any? %>
+	<div class="error-panel p-3">
+		<% if ["edit", "update"].include? action_name %>
+		<h5> Erros ao alterar usuário </h5>
+		<% else %>
+		<h5> Erros ao criar usuário </h5>
+		<% end %>
+		<ul>
+			<% model.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+</div>

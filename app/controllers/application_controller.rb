@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
 		if resource.instance_of? Admin
-			admins_dashboard_root_path
+			admin_root_path
 		elsif resource.instance_of? Institution
 			institutions_dashboard_root_path
 		elsif resource.instance_of? User
