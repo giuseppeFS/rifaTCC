@@ -1,0 +1,21 @@
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+	<div class="container-fluid">
+		<% if (controller_path.include? 'admin') && (admin_signed_in?) %>
+		<a class="navbar-brand" href="<%= admin_root_path %>">
+		<% else %>
+		<a class="navbar-brand" href="<%= root_path %>">
+		<% end %>
+		<img src="/assets/rifa_amiga_logo.png" alt="" width="70" height="70">
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<% if (controller_path.include? 'admin') && (admin_signed_in?) %>
+			<%= render 'layouts/navigation/admin_navigation' %>
+			<% else %>
+			<%= render 'layouts/navigation/main_navigation' %>
+			<% end %>
+		</div>
+	</div>
+</nav>

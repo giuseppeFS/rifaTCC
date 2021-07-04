@@ -30,6 +30,11 @@ class Institution < ApplicationRecord
   validates :zipCode, presence: true, 
                       length: { maximum: 8 }
 
+
+  def self.not_approved_count
+    where(:status => false).size
+  end
+
   private
 
   def cnpj_valid?

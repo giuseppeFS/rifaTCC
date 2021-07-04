@@ -1,0 +1,9 @@
+<ul class="navbar-nav mb-lg-1 justified">
+  <li><a href=<%= institutions_dashboard_profile_path %>>Dados cadastrais</a></li>
+  <li><a href=<%= institutions_dashboard_raffle_path%>>Campanhas</a></li>
+  <% if institution_signed_in? %>
+  <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+    <li><%= link_to('Sair', destroy_institution_session_path, method: :delete) %></li>
+  </ul>
+  <% end %>
+</ul>

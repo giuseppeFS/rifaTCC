@@ -1,6 +1,8 @@
 <div class="row">
 	<div class="col-md-12">
-			<%= debug(controller_path) %>
+			<%= debug(controller_path) if Rails.env.development? %>
 			<%= debug(params) if Rails.env.development? %>
+			<%= debug(pundit_user.class) if Rails.env.development? %>
+			<%= debug(current_institution.class) if Rails.env.development? %>
 	</div>
 </div>

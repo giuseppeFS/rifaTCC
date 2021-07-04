@@ -20,7 +20,7 @@ class CreateInstitution < ActiveRecord::Migration[5.1]
         t.integer :agency_number
         t.integer :account_number
     	  t.string  :qualification
-        t.string  :about
+        t.text    :about
         t.float   :rating
         t.boolean :status, default: false
 

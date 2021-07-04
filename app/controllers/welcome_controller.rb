@@ -5,7 +5,11 @@ class WelcomeController < ApplicationController
 	end
 
 	def log_in
-		render "sign_in"
+		if pundit_user.nil?
+			render "sign_in"
+		else
+			redirect_to root_path
+		end
 	end
 
 	def access_user

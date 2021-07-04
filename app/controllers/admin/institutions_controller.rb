@@ -4,7 +4,7 @@ class Admin::InstitutionsController < ApplicationController
 
 	def index
 		authorize Institution
-		@institutions = Institution.paginate(page: params[:page], per_page: 10)
+		@institutions = Institution.where(:status => true).paginate(page: params[:page], per_page: 10)
 	end
 
 	def show
@@ -38,7 +38,7 @@ class Admin::InstitutionsController < ApplicationController
 		authorize @institution
 
 		# Remove a senha caso o usuario nao informou uma nova
-		if params[:institution][:password] == ''
+		if params[:institution][:password] == '' && params[:institution][:password_confirmation] == ''
 			end_params = institution_params_no_password
 		else
 			end_params = institution_params
@@ -47,8 +47,11 @@ class Admin::InstitutionsController < ApplicationController
 		if @institution.update(end_params)
 			redirect_to :admin_institutions, :notice => "Instituição Atualizado/Criado com sucesso"
 		else
-			flash.now[:danger] = "Não foi possivel criar/alterar instituição"
-			render 'edit'
+			respond_to do |format|
+			format.json {render :json => {:model => @institution.class.name.downcase, :error => @institution.errors.as_json}, :status => 422}
+			format.html {render 'edit'}
+			#flash.now[:danger] = "Não foi possivel criar/alterar instituição"
+			end
 		end	
 	end
 
@@ -65,7 +68,7 @@ class Admin::InstitutionsController < ApplicationController
 	def institutions_approval
 		authorize Institution
 
-		@institutions = Institution.where(:status => false).paginate(page: params[:page], per_page: 1)
+		@institutions = Institution.where(:status => false).paginate(page: params[:page], per_page: 10)
 	end	
 
 	def aprove_institution

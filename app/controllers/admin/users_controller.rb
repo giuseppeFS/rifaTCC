@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :show, :destroy]
+	before_action :set_user, only: [:edit, :update, :show, :destroy, :profile]
 	before_action :clean_params, only: [:create, :update]
   
 	def index
@@ -8,7 +8,6 @@ class Admin::UsersController < ApplicationController
 	end
 
 	def show
-		authorize User
 		render 'edit'
 	end
 
@@ -37,7 +36,7 @@ class Admin::UsersController < ApplicationController
 		authorize User
 
 		# Remove a senha caso o usuario nao informou uma nova
-		if params[:user][:password] == ''
+		if params[:user][:password] == '' && params[:user][:password_confirmation] == ''
 			end_params = user_params_no_password
 		else
 			end_params = user_params
@@ -46,8 +45,11 @@ class Admin::UsersController < ApplicationController
 		if @user.update(end_params)
 			redirect_to :admin_root, :notice => "Usuário Atualizado/Criado com sucesso"
 		else
-			flash.now[:danger] = "Não foi possivel criar/alterar usuário"
-			render 'edit'
+			respond_to do |format|
+			format.json {render :json => {:model => @user.class.name.downcase, :error => @user.errors.as_json}, :status => 422}
+			format.html {render 'edit'}
+			#flash.now[:danger] = "Não foi possivel criar/alterar usuário"
+			end
 		end		
 	end
 
@@ -59,6 +61,10 @@ class Admin::UsersController < ApplicationController
 		flash[:danger] = "Usuário deletado com sucesso"
 
 		redirect_to users_path
+	end
+
+	def profile
+		authorize User
 	end
 
 	private

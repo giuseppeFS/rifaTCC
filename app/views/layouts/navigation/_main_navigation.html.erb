@@ -1,0 +1,17 @@
+<ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+ <% if user_signed_in? %>
+ <li class="nav-item"><%= link_to 'account_circle', user_profile_path(pundit_user), class: "nav-link active material-icons" %></li>
+ <% end %>
+
+ <% if institution_signed_in? %>
+ <li class="nav-item"><%= link_to institution_profile_path, class: "nav-link active" do %> <span class="material-icons align-middle">account_circle</span> <span class="align-middle">Minha Conta</span> <% end %></li>
+ <% end %>
+
+ <% if user_signed_in? %>
+ <li class="nav-item"><%= link_to 'logout', destroy_user_session_path, method: :delete, class: "nav-link active material-icons" %></li>
+ <% elsif institution_signed_in? %>
+ <li class="nav-item"><%= link_to destroy_institution_session_path, method: :delete, class: "nav-link active" do %><span class="material-icons align-middle">logout</span> <span class="align-middle">Sair</span><%end%></li>
+ <% else %>
+ <li class="nav-item"><%= link_to sign_in_path, method: :get, class: "nav-link active" do %> <span class="material-icons align-middle">login</span> <span class="align-middle">Entrar</span> <%end%></li>
+ <% end %>
+</ul>

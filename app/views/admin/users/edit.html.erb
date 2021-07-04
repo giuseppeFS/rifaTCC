@@ -2,5 +2,8 @@
    <h1 class="text-center">Alterando Usuário</h1>
 </div>
 <div class="row">
-    <%= render partial: 'shared/user/form', locals: {model: @user, url: admin_user_path(@user), form_back_page: admin_root_path, form_is_edit: true} %>
+   <div class="col-md-3"></div>
+   <div class="col-md-6">
+     <%= render partial: 'shared/user/form', locals: {model: @user, url: admin_user_path(@user), form_back_page: admin_root_path, form_is_edit: true} %>
+  </div>
 </div>

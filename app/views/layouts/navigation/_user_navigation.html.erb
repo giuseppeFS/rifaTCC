@@ -1,0 +1,9 @@
+<ul class="navbar-nav mb-lg-1 justified">
+  <li><a href=<%= users_dashboard_root_path %>>Dados Cadastrais</a></li>
+  <li><a href=<%= users_dashboard_tickets_path %>>Tickets</a></li>
+  <% if user_signed_in? %>
+  <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+    <li><%= link_to('Sair', destroy_user_session_path, method: :delete) %></li>
+  </ul>
+  <% end %>
+</ul>

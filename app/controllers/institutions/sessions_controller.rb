@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Institutions::SessionsController < Devise::SessionsController
-  skip_before_action :check_user, only: :destroy
+  # skip_before_action :check_user, only: :destroy
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

@@ -1,9 +1,34 @@
 Rails.application.routes.draw do
 
   #
-  # Devise for Admin Authentication
+  # Open routes to the app
   #
-  devise_for :admins, path: 'admin', controllers: {sessions: "admin/sessions", passwords: "admin/passwords", registrations: "admin/registrations"}
+  get  'sign_in', to: 'welcome#log_in'
+  post 'sign_in_user', to: 'welcome#access_user'
+  post 'sign_in_institution', to: 'welcome#access_institution'
+
+  #
+  # User acess routes
+  #
+  resource :user
+  
+  namespace :user do
+    #
+    # User root
+    #
+    root :to => 'user#profile' 
+
+    get 'tickets', action: :index, controller: 'tickets'
+  end
+
+
+  #
+  # Intitutions acess routes
+  #
+  resource :institutions
+
+  get 'institution/profile', action: 'profile', controller: 'institutions'
+  get 'institution', to: redirect('/institution/profile')
 
   #
   # Admin area rounting
@@ -35,68 +60,19 @@ Rails.application.routes.draw do
   end
 
   #
+  # Devise for Admin Authentication
+  #
+  devise_for :admins, path: 'admin', controllers: {sessions: "admin/sessions", passwords: "admin/passwords", registrations: "admin/registrations"}
+
+  #
   # Devise for Users Authentication
   #
   devise_for :users, path: 'user', controllers: { sessions: "users/sessions", passwords: "users/passwords", registrations: "users/registrations"}
 
   #
-  # User acess routes
-  #
-  scope module: 'users' do
-    resources :users
-  end
-  
-  namespace :users do
-
-    #
-    # User root
-    #
-    root :to => 'dashboard/users#profile' 
-
-    #
-    # User profile actions
-    #
-    namespace :dashboard do
-      root :to => 'users#profile'
-
-      get 'tickets',     action: :index, controller: 'tickets'
-      get 'wallet',      action: :show,  controller: 'wallets'
-    end
-  end
-
-  #
   # Devise for Institutions Authentication
   #
-  devise_for :institutions, path: 'institutions', controllers: { sessions: "institutions/sessions", passwords: "institutions/passwords", registrations: "institutions/registrations"}
-
-  scope module: 'institutions' do
-    resources :institutions
-  end
-
-  # Admin Root
-  namespace :institutions do
-    namespace :dashboard do
-      #
-      # Intitutions root
-      #
-      root :to => 'dashboard/institutions#profile'
-
-      resources :raffles
-
-      resources :institutions, only: [:edit, :update]
-
-      get 'profile', action: :profile, controller: 'institutions'
-
-      get 'wallet', action: :show,  controller: 'wallet'
-    end
-  end
-
-  #
-  # Open routes to the app
-  #
-  get  'sign_in', to: 'welcome#log_in'
-  post 'sign_in_user', to: 'welcome#access_user'
-  post 'sign_in_institution', to: 'welcome#access_institution'
+  devise_for :institutions, path: 'institution', controllers: { sessions: "institutions/sessions", passwords: "institutions/passwords", registrations: "institutions/registrations"}
 
   #
   # Main App Page
