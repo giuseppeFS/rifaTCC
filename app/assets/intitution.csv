@@ -1,0 +1,5 @@
+cnpj;email;password;corporate_name;social_reason;address;number;complement;neighborhood;zipCode;phone_number;phone_number2;bank_number;agency_number;account_number;qualification;rating;status
+53129587000108;hospital@hc.com.br;123456;HOSPITAL DE CLÍNICAS UNIVERSIDADE FEDERAL DO PARANÁ;Hospital de Clinicas;Rua XV de novembro;124;Próximo ao terminal;Centro;805600;4133349857;41987564367;237;4563;234565;405;10;true
+17593461000118;insitucional@casadeauxilio.com.br;123456;Casa de Auxilio LLC;Casa de Auxilio;Avenida Candido de Abreu;873;Proximo ao Muller;Centro Civico;8053000;4132435678;419845906745;403;7836;78497;405 - Sem fins lucrativos;10;false
+33463187000119;institutoore@insitucional.com.br;123456;Instituto ORE LLC;Instituto ORE;Rua Goberto Mariano;93;;Hugo Lange;8053000;4132435678;419845906745;403;7836;78497;405;10;false
+68341322000138;insitucional@AABC.com.br;123456;AABC ONG;AABC;Rua Floriano Peixoto;83;;Merces;8053000;4132435678;419845906745;403;7836;78497;405;10;false

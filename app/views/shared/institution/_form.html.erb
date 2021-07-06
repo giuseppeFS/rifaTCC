@@ -1,6 +1,8 @@
 <%= form_with model: model, class: 'has-validation-return', url: url do |f| %>
 
-<div class="col-md-12"><h5 class="sub-group-form">Identificação</h5></div>
+<div class="row">
+	<div class="col-md-12"><h5 class="sub-group-form">Identificação</h5></div>
+</div>
 <div class="row">
 	<div class="col-md-6">
 		<%= f.label :cnpj, "CNPJ", class: "form-label mt-1 rmb-1" %>
@@ -44,6 +46,7 @@
 		<div id="qualification_feedback" class="invalid-feedback"></div>
 	</div>
 
+	<div class="col-md-12"><h5 class="sub-group-form">Acesso</h5></div>
 	<div class="col-md-6">
 		<%= f.label :password, "Senha", class: "form-label mt-1 rmb-1" %>
 		<div class="input-group has-validation">

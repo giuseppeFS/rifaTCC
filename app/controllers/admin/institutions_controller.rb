@@ -24,7 +24,11 @@ class Admin::InstitutionsController < ApplicationController
 		if @institution.save
 			flash[:sucess] = "Instituição criado com sucesso"
 		else
-			render 'new'
+			respond_to do |format|
+			format.json {render :json => {:model => @institution.class.name.downcase, :error => @institution.errors.as_json}, :status => 422}
+			format.html {render 'new'}
+			#flash.now[:danger] = "Não foi possivel criar/alterar instituição"
+			end
 		end
 	end
 

@@ -47,250 +47,56 @@ require 'csv'
 
 # BRPopulate.populate
 
-user_list = [
-  [
-   '09240456988',
-   'Giuseppe Ferrarini',
-   'giuseppe@gmail.com',
-   '123456',
-   'Rodovia Antonio Alceu Zielonka',
-   '1812',
-   'Esquina',
-   'Planta Deodoro',
-   '83304305',
-   '41',
-   '36733548',
-   '41',
-   '992220072'
-   ],
-   [
-    '99999999999',
-    'Miguelito Irregular',
-    'miguelito@gmail.com',
-    '123456',
-    'Rua Mario Pecanha',
-    '1012',
-    '',
-    'Centro',
-    '80530000',
-    '41',
-    '33333333',
-    '41',
-    '999223344'
-    ],
-    [
-      '99999999998',
-      'Joao Peçanha',
-      'peçanha@gmail.com',
-      '123456',
-      'Rua Antonio Carmo',
-      '872',
-      '',
-      'Novo mundo',
-      '86589712',
-      '41',
-      '3567890',
-      '41',
-      '999999999'
-      ],
-      [
-        '99999999997',
-        'Roberta Alves',
-        'robertaA@gmail.com',
-        '123456',
-        'Alameda Paris',
-        '12',
-        '',
-        'Boqueirao',
-        '87463648',
-        '41',
-        '3567890',
-        '41',
-        '999999999'
-        ],
-        [
-          '99999999996',
-          'Roberta Alves',
-          'robertaA@gmail.com',
-          '123456',
-          'Alameda Paris',
-          '12',
-          '',
-          'Boqueirao',
-          '87463648',
-          '41',
-          '3567890',
-          '41',
-          '999999999'
-        ]
-      ]
+puts 'Iniciando'
 
-      user_list.each do | 
-        cpf,
-        name,
-        email,
-        password,
-        address,
-        number,
-        complement,
-        neighborhood,
-        zipCode,
-        ddd_phone,
-        phone_number,
-        ddd_cellphone,
-        cellphone_number |
+CSV.foreach(File.join(Rails.root, 'app', 'assets', 'user.csv'), {headers: true, :col_sep => ";"}) do |row|
+  begin
+    puts row.to_hash
+    u = User.create(row.to_hash)
+    puts u.errors.full_messages 
+  rescue StandardError => e
+   puts "Rescued: #{e.inspect}"
+  end
+end
 
-        User.create ({
-          :cpf => cpf,
-          :name => name,
-          :email => email,
-          :password => password,
-          :address => address,
-          :number => number,
-          :complement => complement,
-          :neighborhood => neighborhood,
-          :zipCode => zipCode,
-          :ddd_phone => ddd_phone,
-          :phone_number => phone_number,
-          :ddd_cellphone => ddd_cellphone,
-          :cellphone_number => cellphone_number
-          })
+CSV.foreach(File.join(Rails.root, 'app', 'assets', 'intitution.csv'), {headers: true, :col_sep => ";"}) do |row|
+  begin
+    puts row.to_hash
+    i = Institution.create(row.to_hash)
+    puts i.errors.full_messages 
+  rescue StandardError => e
+   puts "Rescued: #{e.inspect}"
+  end
+end
 
-      end
+CSV.foreach(File.join(Rails.root, 'app', 'assets', 'categories.csv'), {headers: true, :col_sep => ";"}) do |row|
+  begin
+    puts row.to_hash
+    c = Category.create(row.to_hash)
+    puts r.errors.full_messages 
+  rescue StandardError => e
+   puts "Rescued: #{e.inspect}"
+  end
+end
 
-      institutions_list = [
-        [
-          '53129587000108',
-          'hc@hospital.com.br',
-          '123456',
-          'Hospital de Clinicas LTDA',
-          'Hospital de Clinicas',
-          'Rua XV de novembro',
-          'Proximo ao terminal',
-          'Centro',
-          '805600',
-          '41',
-          '33349857',
-          '41',
-          '987564367',
-          237,
-          4563,
-          234565,
-          '405 - Sem fins lucrativos',
-          10,
-          true
-          ],
-          [
-            '17593461000118',
-            'casadeauxilio@insitucional.com.br',
-            '123456',
-            'Casa de Auxilio LLC',
-            'Casa de Auxilio',
-            'Avenida Candido de Abreu',
-            'Proximo ao Muller',
-            'Centro Civico',
-            '8053000',
-            '41',
-            '32435678',
-            '41',
-            '9845906745',
-            403,
-            7836,
-            78497,
-            '405 - Sem fins lucrativos',
-            10,
-            false
-            ],
-            [
-              '17593461000118',
-              'institutoore@insitucional.com.br',
-              '123456',
-              'Instituto ORE LLC',
-              'Instituto ORE',
-              'Rua Goberto Mariano',
-              '',
-              'Hugo Lange',
-              '8053000',
-              '41',
-              '32435678',
-              '41',
-              '9845906745',
-              403,
-              7836,
-              78497,
-              '405 - Sem fins lucrativos',
-              10,
-              false
-              ],
-              [
-                '17593461000118',
-                'AABC@insitucional.com.br',
-                '123456',
-                'AABC ONG',
-                'AABC',
-                'Rua Floriano Peixoto',
-                '',
-                'Merces',
-                '8053000',
-                '41',
-                '32435678',
-                '41',
-                '9845906745',
-                403,
-                7836,
-                78497,
-                '405 - Sem fins lucrativos',
-                10,
-                false
-                ],
-              ]
+Condition.create(:name => "Novo");
+Condition.create(:name => "Semi-novo");
+Condition.create(:name => "Usado");
+Condition.create(:name => "Restaurado");
 
-              institutions_list.each do |
-                cnpj,
-                email,
-                password,
-                corporate_name,
-                social_reason,
-                address,
-                number,
-                complement,
-                neighborhood,
-                zipCode,
-                ddd_phone,
-                phone_number,
-                ddd_phone2,
-                phone_number2,
-                bank_number,
-                agency_number,
-                account_number,
-                qualification,
-                rating,
-                status
-                |
+DeliveryType.create(:name => "Correios");
+DeliveryType.create(:name => "Receber na instituição");
+DeliveryType.create(:name => "Email/Telefone");
+DeliveryType.create(:name => "Outros/Entrar em contato");
 
-                institution = Institution.create({
-                  :cnpj => cnpj,
-                  :email => email,
-                  :password => password,
-                  :corporate_name => corporate_name,
-                  :social_reason => social_reason,
-                  :address => address,
-                  :number => number,
-                  :complement => complement,
-                  :neighborhood => neighborhood,
-                  :zipCode => zipCode,
-                  :ddd_phone => ddd_phone,
-                  :phone_number => phone_number,
-                  :ddd_phone2 => ddd_phone2,
-                  :phone_number2 => phone_number2,
-                  :bank_number => bank_number,
-                  :agency_number => agency_number,
-                  :account_number => account_number,
-                  :qualification => qualification,
-                  :rating => rating,
-                  :status => status
-                  })
+CSV.foreach(File.join(Rails.root, 'app', 'assets', 'raffle.csv'), {headers: true, :col_sep => ";"}) do |row|
+  begin
+    puts row.to_hash
+    r = Raffle.create(row.to_hash)
+    puts r.errors.full_messages 
+  rescue StandardError => e
+   puts "Rescued: #{e.inspect}"
+  end
+end
 
-              end
-
-              Admin.create(:email => 'institucional@rifaamiga.com', :password => '123456')
+Admin.create(:email => 'institucional@rifaamiga.com', :password => '123456')

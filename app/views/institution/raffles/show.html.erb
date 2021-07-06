@@ -1,0 +1,11 @@
+<div class="row">
+    <div id="sidebar_wrap" class="col-md-3">
+        <%= render 'layouts/navigation/sidebar_menu' %>
+    </div>
+    <div class="col-md-8">
+        <h1 class="text-center">Visualizar Rifa</h1>
+        <div id='form_wrap' class="disabled">
+            <%= render partial: 'shared/raffle/form', locals: {model: @raffle, url: institution_raffles_path(@raffle), form_back_page: institution_raffles_path, form_is_edit: false, just_show: true} %>
+        </div>
+    </div>
+</div>

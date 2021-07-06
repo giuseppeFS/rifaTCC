@@ -1,4 +1,6 @@
 class Institution < ApplicationRecord
+  has_many :raffles
+
   before_save { self.email = email.downcase }
 
   devise :database_authenticatable,

@@ -23,6 +23,8 @@ gem 'pundit'
 # Jquery gem
 gem 'jquery-rails'
 gem 'jquery_mask_rails'
+gem 'jquery-ui-rails'
+gem 'chart-js-rails'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

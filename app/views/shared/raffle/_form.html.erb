@@ -1,64 +1,115 @@
-<% if @raffle.errors.any? %>
-<h2> Erros ao criar campanha </h2>
-<ul>
-	<% @raffle.errors.full_messages.each do |msg| %>
-	<li><%= msg %></li>
-	<% end %>
-</ul>
-<% end %>
+<%= form_with model: model, class: 'has-validation-return', url: url do |f| %>
 
-<%= form_for @raffle do |f| %>
-
-<%= f.label :cnpj %>
-<div class="input-group">
-	<%= f.text_field :cnpj, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-12"><h5 class="sub-group-form">Sobre a Rifa</h5></div>
+</div>
+<div class='row'>
+	<div class="col-md-12">
+		<%= f.label :title, "Título", class: "form-label mt-1 rmb-1", maxlength: 100 %>
+		<div class="input-group has-validation">
+			<%= f.text_field :title, :class => 'form-control rounded-3' %>
+			<div id="title_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
 </div>
 
-<%= f.label :title %>
-<div class="input-group">
-	<%= f.text_field :title, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-12">
+		<%= f.label :description, "Descrição da campanha", class: "form-label mt-1 rmb-1" %>
+		<div class="input-group has-validation">
+			<%= f.text_area :description, :class => 'form-control rounded-3', rows: 10, maxlength: 500 %>
+			<div id="description_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
 </div>
 
-<%= f.label :description %>
-<div class="input-group">
-	<%= f.text_field :description, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-12"><h5 class="sub-group-form">Sobre a Prêmio</h5></div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<%= f.label :prize, "Prêmio", class: "form-label mt-1 rmb-1" %>
+		<div class="input-group has-validation">
+			<%= f.text_field :prize, :class => 'form-control rounded-3', maxlength: 30 %>
+			<div id="prize_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<%= f.label :prize_description, "Descrição do prêmio", class: "form-label mt-1 rmb-1" %>
+		<div class="input-group has-validation">
+			<%= f.text_area :prize_description, :class => 'form-control rounded-3', rows: 5, maxlength: 200 %>
+			<div id="prize_description_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<%= f.label :condition, "Condição de prêmio", class: "form-label mt-1 rmb-1" %>
+
+		<%= collection_select(model, :condition_id, Condition.all, :id, :name, options = {:prompt => false}, html_options = {class: "form-select has-validation rounded-3"}) %>
+	</div>
+	<div class="col-md-6">
+		<%= f.label :delivery, "Como será entregue", class: "form-label mt-1 rmb-1" %>
+
+		<%= collection_select(model, :delivery_type_id, DeliveryType.all, :id, :name, options = {:prompt => false}, html_options = {class: "form-select has-validation rounded-3"}) %>
+	</div>
 </div>
 
-<%= f.label :draw_date %>
-<div class="input-group">
-	<%= f.text_field :draw_date, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-6">
+		<%= f.label :category, "Categoria", class: "form-label mt-1 rmb-1" %>
+
+		<%= collection_select(model, :category_id, Category.all, :id, :name, options = {:prompt => false}, html_options = {class: "form-select has-validation rounded-3"}) %>
+	</div>
 </div>
 
-<%= f.label :unit_value %>
-<div class="input-group">
-	<%= f.text_field :unit_value, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-12"><h5 class="sub-group-form">Condições do Sorteio</h5></div>
 </div>
 
-<%= f.label :goal_value %>
-<div class="input-group">
-	<%= f.text_field :goal_value, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-6">
+		<%= f.label :unit_value, "Valor por números", class: "form-label mt-1 rmb-1" %>
+		<div class="input-group has-validation">
+			<span class="material-icons input-group-text">paid</span>
+			<%= f.text_field :unit_value, :class => 'form-control rounded-3 currency', maxlength: 7 %>
+			<div id="unit_value_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<%= f.label :tickets_number, "Quantidade de números", class: "form-label mt-1 rmb-1" %>
+		<div class="input-group has-validation">
+			<span class="material-icons input-group-text">label</span>
+			<%= f.text_field :tickets_number, :class => 'form-control rounded-3', "data-mask": "9999" %>
+			<div id="tickets_number_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
 </div>
 
-<%= f.label :delivery %>
-<div class="input-group">
-	<%= f.text_field :delivery, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-6">
+		<%= f.label :draw_date, "Data do Sorteio", class: "form-label mt-1 rmb-1" %>
+		<div class="input-group has-validation">
+			<span class="material-icons input-group-text">event</span>
+			<%= f.text_field :draw_date, :class => 'form-control rounded-3 datepicker', "data-provide" => "datepicker" %>
+			<div id="draw_date_feedback" class="invalid-feedback"></div>
+		</div>
+	</div>
 </div>
 
-<%= f.label :condition %>
-<div class="input-group">
-	<%= f.text_field :condition, :class => 'form_control' %>
+<div class="row">
+	<div class="col-md-6">
+		<%= link_to 'Voltar', form_back_page, class: "btn btn-submit-adm mt-3" %>
+	</div>
+	<div class="col-md-6">
+		<% if !just_show %>
+		<% if form_is_edit %>
+		<%= f.submit "Atualizar", class: "btn btn-submit-adm mt-3"%>
+		<% else %>
+		<%= f.submit "Cadastar", class: "btn btn-submit-adm mt-3"%>
+		<% end %>
+		<% end %>
+	</div>
 </div>
-
-<%= f.label :prize %>
-<div class="input-group">
-	<%= f.text_field :prize, :class => 'form_control' %>
-</div>
-
-<%= f.label :prize_description %>
-<div class="input-group">
-	<%= f.text_field :prize_description, :class => 'form_control' %>
-</div>
-
-<%= f.submit %>
 
 <% end %>

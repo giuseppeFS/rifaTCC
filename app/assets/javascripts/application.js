@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery.mask
+//= require jquery-ui
+//= require jquery-ui/i18n/datepicker-pt-BR
+//= require Chart.min
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
@@ -25,10 +28,37 @@ $(document).on('turbolinks:load', function(){
   });
 
   $("form.has-validation-return").bind("ajax:error", function(data){
-      var objResponse = data.detail[0];
-      doInputErrorMessages(objResponse.model, objResponse.error);
-    });
+    var objResponse = data.detail[0];
+    doInputErrorMessages(objResponse.model, objResponse.error);
   });
+
+  $("div.disabled").find("input.form-control").prop("disabled", true);
+  $("div.disabled").find("textarea.form-control").prop("disabled", true);
+  $("div.disabled").find("select").prop("disabled", true);
+
+  $('.currency').mask('#.##0,00', {reverse: true});
+
+  $('.datepicker').datepicker();
+
+
+  $('.raffleProgessChart').each(function(e){
+    var ctxP = this;
+    var myPieChart = new Chart(ctxP, {
+      type: 'doughnut',
+      data: {
+        labels: ["Vendidos", "Em Aberto"],
+        datasets: [{
+          data: [this.getAttribute('data-tickets-sold'), this.getAttribute('data-tickets-open')],
+          backgroundColor: ["#fed18c", "#fe664f"],
+          hoverBackgroundColor: ["#ffa926", "#ff3112"]
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });  
+  });
+});
 
 
 function doInputErrorMessages(model, errors_json) {

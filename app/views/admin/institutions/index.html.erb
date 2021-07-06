@@ -44,7 +44,7 @@
 					<tr>
 						<td><%= institution.social_reason %></td>
 						<td><%= CNPJ.new(institution.cnpj).formatted %></td>
-						<td><%= number_to_phone(institution.ddd_phone + institution.phone_number, area_code: true, pattern: /(\d{2})(\d{4})(\d{4})$/)  %></td>
+						<td><%= number_to_phone(institution.phone_number, area_code: true, pattern: /(\d{2})(\d{4})(\d{4})$/)  %></td>
 						<td><%= institution.address %></td>
 						<td><%= institution.number %></td>
 						<td><%= institution.email %></td>

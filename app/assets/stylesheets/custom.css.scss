@@ -6,6 +6,7 @@ $body-background-color: #df6f2f2;
 
 $orange-background-color: rgb(254,209,140);;
 $tomato-background-color: rgb(254,101,79);
+$brown-background-color: #AA8774;
 
 body {
 background-color: $body-background-color;
@@ -15,7 +16,7 @@ background-color: $body-background-color;
 background-size: cover;
 width: 100%;
 height:100vh;  /* responsive height */
-padding-top: 8em;
+padding-top: 7em;
 }
 
 footer {
@@ -48,9 +49,33 @@ background: rgb(254,101,79);
 background: linear-gradient(0deg, rgba(254,101,79,1) 0%, rgba(254,101,79,1) 35%, rgba(254,101,79,1) 100%);
 }
 
-#navbar, #sidebar_menu {
+#navbar {
 background: $orange-background-color;
 background: linear-gradient(0deg, rgba(254,209,140,1) 0%, rgba(254,209,140,1) 35%, rgba(254,209,140,1) 100%);
+}
+
+#sidebar_wrap {
+  margin-top: 4.1em;
+}
+
+#sidebar_menu {
+ background: $orange-background-color;
+ border-color: $orange-background-color;
+ border-size: 2px;
+ border-style: solid;
+ border-radius: 5px;
+}
+
+#sidebar_menu div a.active {
+  background: $brown-background-color;
+  border-color: $brown-background-color;
+}
+
+#raffle_filters {
+ border-color: $orange-background-color;
+ border-size: 2px;
+ border-style: solid;
+ border-radius: 5px;
 }
 
 #main_admin table thead{
@@ -76,12 +101,26 @@ margin-bottom: 1em;
 float: right;
 }
 
+.with-main-border{
+ border-color: $orange-background-color;
+ border-size: 2px;
+ border-style: solid;
+ border-radius: 5px;
+}
+
 .vertical-center {
 min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
 min-height: 50vh; /* These two lines are counted as one :-)       */
 
 display: flex;
 align-items: center;
+}
+
+.raffle-card {
+ border-color: $orange-background-color;
+ border-size: 2px;
+ border-style: solid;
+ border-radius: 5px;
 }
 
 .square:after{
@@ -101,19 +140,19 @@ padding-top: 15%;  /* initial ratio of 1:1*/
 }
 
 .btn-submit {
-background: #AA8774;
+background: $brown-background-color;
 color: white;
 width: 80%;
 }
 
 .btn-submit-adm {
-background: #AA8774;
+background: $brown-background-color;
 color: white;
 width: 100%;
 }
 
 .btn-action {
-background: #AA8774;
+background: $brown-background-color;
 color: white;
 }
 

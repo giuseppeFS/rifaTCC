@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
   #
+  # Main App Page
+  #
+  root :to => "home#home"
+
+  #
   # Open routes to the app
   #
-  get  'sign_in', to: 'welcome#log_in'
-  post 'sign_in_user', to: 'welcome#access_user'
-  post 'sign_in_institution', to: 'welcome#access_institution'
+  get  'sign_in', to: 'home#log_in'
+  post 'sign_in_user', to: 'home#access_user'
+  post 'sign_in_institution', to: 'home#access_institution'
 
   #
   # User acess routes
@@ -25,10 +30,16 @@ Rails.application.routes.draw do
   #
   # Intitutions acess routes
   #
-  resource :institutions
+  get 'institution', controller: 'institution', action: 'profile', as: 'institution_root'
 
-  get 'institution/profile', action: 'profile', controller: 'institutions'
-  get 'institution', to: redirect('/institution/profile')
+  resource :institution, only: [:destroy, :show, :update, :edit], controller: 'institution' do
+    get 'profile'
+  end
+
+  namespace :institution do
+    resources :raffles
+  end
+
 
   #
   # Admin area rounting
@@ -73,10 +84,4 @@ Rails.application.routes.draw do
   # Devise for Institutions Authentication
   #
   devise_for :institutions, path: 'institution', controllers: { sessions: "institutions/sessions", passwords: "institutions/passwords", registrations: "institutions/registrations"}
-
-  #
-  # Main App Page
-  #
-  root :to => "welcome#home"
-
 end

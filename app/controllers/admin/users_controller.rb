@@ -90,9 +90,7 @@ class Admin::UsersController < ApplicationController
 			:complement,
 			:neighborhood,
 			:zipCode,
-			:ddd_phone,
 			:phone_number,
-			:ddd_cellphone,
 			:cellphone_number)
 	end
 

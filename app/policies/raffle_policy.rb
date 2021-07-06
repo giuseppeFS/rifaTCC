@@ -19,10 +19,12 @@ class RafflePolicy < ApplicationPolicy
   end
 
   def create?
-    if user.instance_of? Admin
+    if user.instance_of? Admin # e admin?
       return true
-    elsif user.instance_of? Institution 
-      return true
+    elsif user.instance_of? Institution # E um instituicao
+      if record.institution = user # A rifa pertence a intituicao logada
+        return true
+      end
     end
     false
   end

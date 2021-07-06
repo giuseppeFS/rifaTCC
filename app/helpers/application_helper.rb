@@ -10,4 +10,8 @@ module ApplicationHelper
   def is_active(controller)       
     controller_name == controller ? "active" : nil     
   end
+
+  def is_active_action(action)       
+    action_name == action ? "active" : nil     
+  end
 end
