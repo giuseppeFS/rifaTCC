@@ -37,7 +37,9 @@ Rails.application.routes.draw do
   end
 
   namespace :institution do
-    resources :raffles
+    resources :raffles do
+      post 'upload'
+    end
   end
 
 

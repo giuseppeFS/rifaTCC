@@ -1,32 +1,39 @@
 <div class="row">
    <div id="sidebar_wrap" class="col-md-3">
+      <div class="row">
       <%= render 'layouts/navigation/sidebar_menu' %>
    </div>
+      <div class="row">
+      <%= render 'layouts/navigation/sidebar_menu_filters' %>
+      </div>
+   </div>
    <div class="col-md-8">
-      <h1 class="text-center">Minhas Rifas</h1>
+      <div class="row">
+            <h1 class="text-center">Minhas Rifas</h1>
+      </div>
+      <div class="row">
+         <div class="col-md-3">
+         <%= link_to 'Nova Rifa', new_institution_raffle_path, :class => 'btn btn-action mt-3' %>
+         </div>
+      </div>
+      <div class="row">
       <div id="intitution-raffles-list" class="pt-3">
-         <%= link_to 'Nova Rifa', new_institution_raffle_path, :class => 'btn btn-action' %>
-         <div class="row">
-         <div id="raffle_filters" class="my-2">
-            <h5 class="text-center">Filtrar</h5>
-            <br>
-            <br>
-            <br>
-         </div>
-         </div>
-         <div class="row">
          <% @raffles.each do |raffle| %>
          <div class="card my-2">
             <div class="raffle-card">
                <div class="row g-0">
                   <div class="col-md-3">
-                     <img src="https://img.r7.com/images/peugeot-308-14052020221514936" class="img-fluid rounded" alt="...">
+                     <div class="card-image">
+                     <img src="<%= raffle.images.attached? ? url_for(raffle.images.first) : "/assets/placeholder-image.jpg" %>" class="img-fluid rounded">
+                     </div>
                   </div>
                   <div class="col-md-5">
                      <div class="card-body">
                         <h5 class="card-title"><%= raffle.title %></h5>
                         <p class="card-text"><%= raffle.description %></p>
-                        <p class="card-text"><small class="text-muted">Data do sorteio: <%= raffle.draw_date %></small></p>
+                        <p class="card-text"><small>Situação: <%= raffle.raffle_status.description %></small></p>
+                        <p class="card-text"><small>Categoria: <%= raffle.category.name %></small></p>
+                        <p class="card-text"><small class="text-muted">Data do sorteio: <%= raffle.draw_date.strftime('%d/%m/%Y') %></small></p>
                      </div>
                   </div>
                   <div class="col-md-4">
@@ -38,7 +45,7 @@
                      <div class="row">
                         <div class="col-md-12">
                            <div class="d-flex justify-content-center">
-                              <canvas class="raffleProgessChart" data-tickets-sold = "<%= raffle.tickets_sold.to_s %>" data-tickets-open = "<%= (raffle.tickets_number - raffle.tickets_sold).to_s %>" style="width: 500px;"></canvas>
+                              <canvas class="raffleProgessChart" data-tickets-sold = "<%= raffle.tickets_sold.to_s %>" data-tickets-open = "<%= (raffle.tickets_number - 0).to_s %>" style="width: 500px;"></canvas>
                            </div>
                         </div>
                      </div>

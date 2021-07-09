@@ -1,6 +1,6 @@
-<div id="sidebar_menu" class="m-2">
-  <h5 class="text-center pt-2">Navegação</h5>
-  <div class="list-group">
+<div  class="m-2">
+  <div id="sidebar_menu" class="list-group">
+    <h5 class="text-center pt-2">Navegação</h5>
     <a class="list-group-item list-group-item-action text-center <%= is_active_action('profile')%>" href=<%= profile_institution_path %>>Meu perfil</a>
     <a class="list-group-item list-group-item-action text-center <%= is_active('raffles')%>" href=<%= institution_raffles_path %>>Minhas Rifas</a>
     <a class="list-group-item list-group-item-action text-center <%= is_active('withdraw')%>" href=""<%=  %>>Solicitar Saque</a>

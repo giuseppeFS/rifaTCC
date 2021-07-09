@@ -11,6 +11,9 @@ gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 
+# Traducoes
+gem 'rails-i18n'
+
 # Validador de cpf/cnpj
 gem "cpf_cnpj"
 
@@ -24,7 +27,12 @@ gem 'pundit'
 gem 'jquery-rails'
 gem 'jquery_mask_rails'
 gem 'jquery-ui-rails'
+
+# Charts
 gem 'chart-js-rails'
+
+# Drag and Drop upload
+gem 'dropzonejs-rails'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

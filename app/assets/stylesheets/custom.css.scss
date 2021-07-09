@@ -66,16 +66,29 @@ background: linear-gradient(0deg, rgba(254,209,140,1) 0%, rgba(254,209,140,1) 35
  border-radius: 5px;
 }
 
-#sidebar_menu div a.active {
+#sidebar_menu a.active {
   background: $brown-background-color;
   border-color: $brown-background-color;
 }
 
 #raffle_filters {
+ background: $orange-background-color;
  border-color: $orange-background-color;
  border-size: 2px;
  border-style: solid;
  border-radius: 5px;
+}
+
+#raffleImages {
+  height: 200px;
+}
+
+#raffleCarouselInner {
+  height: 400px;
+}
+
+#raffleCarouselInner > div > img{
+  height: 400px;
 }
 
 #main_admin table thead{
@@ -108,6 +121,12 @@ float: right;
  border-radius: 5px;
 }
 
+.card-image {
+  position: relative;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+
 .vertical-center {
 min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
 min-height: 50vh; /* These two lines are counted as one :-)       */
@@ -116,11 +135,11 @@ display: flex;
 align-items: center;
 }
 
-.raffle-card {
- border-color: $orange-background-color;
- border-size: 2px;
- border-style: solid;
- border-radius: 5px;
+.card {
+ border-color: $orange-background-color !important;
+ border-width: 3px !important;
+ border-style: solid !important;
+ border-radius: 5px !important;
 }
 
 .square:after{
@@ -163,4 +182,8 @@ background: $orange-background-color;
 
 .rmb-1{
   margin-bottom: 0vh;
+}
+
+.dz-progress {
+  display: none !important;
 }

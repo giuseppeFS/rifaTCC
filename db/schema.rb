@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_223644) do
+ActiveRecord::Schema.define(version: 2021_07_08_191821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,21 +124,27 @@ ActiveRecord::Schema.define(version: 2021_07_06_223644) do
     t.datetime "updated_at"
   end
 
+  create_table "raffle_statuses", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "raffles", force: :cascade do |t|
     t.integer "institution_id"
-    t.integer "user_id"
-    t.integer "category_id"
-    t.integer "condition_id"
-    t.integer "delivery_type_id"
+    t.integer "user_id", default: 1
+    t.integer "category_id", default: 1
+    t.integer "condition_id", default: 1
+    t.integer "raffle_status_id", default: 1
+    t.integer "delivery_type_id", default: 1
     t.string "title"
     t.text "description"
     t.string "prize"
     t.text "prize_description"
-    t.float "unit_value"
-    t.integer "tickets_number"
-    t.integer "tickets_sold"
+    t.float "unit_value", default: 0.0
+    t.integer "tickets_number", default: 0
+    t.integer "tickets_sold", default: 0
     t.datetime "draw_date"
-    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

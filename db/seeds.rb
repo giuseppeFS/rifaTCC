@@ -79,6 +79,12 @@ CSV.foreach(File.join(Rails.root, 'app', 'assets', 'categories.csv'), {headers: 
   end
 end
 
+RaffleStatus.create(:description => 'Aberto');
+RaffleStatus.create(:description => 'Sorteado');
+RaffleStatus.create(:description => 'Aguardando entrega');
+RaffleStatus.create(:description => 'Aguardando saque');
+RaffleStatus.create(:description => 'Cancelado');
+
 Condition.create(:name => "Novo");
 Condition.create(:name => "Semi-novo");
 Condition.create(:name => "Usado");
