@@ -104,7 +104,7 @@
 		<%= f.label :unit_value, "Valor por números", class: "form-label mt-1 rmb-1" %>
 		<div class="input-group has-validation">
 			<span class="material-icons input-group-text">paid</span>
-			<%= f.text_field :unit_value, :class => 'form-control rounded-3 currency', maxlength: 7 %>
+			<%= f.text_field :unit_value, :class => 'form-control rounded-3 currency', maxlength: 7, "placeholder": "0,00" %>
 			<div id="unit_value_feedback" class="invalid-feedback"></div>
 		</div>
 	</div>
@@ -112,7 +112,7 @@
 		<%= f.label :tickets_number, "Quantidade de números", class: "form-label mt-1 rmb-1" %>
 		<div class="input-group has-validation">
 			<span class="material-icons input-group-text">label</span>
-			<%= f.text_field :tickets_number, :class => 'form-control rounded-3', "data-mask": "9999", "placeholder": "0,00" %>
+			<%= f.text_field :tickets_number, :class => 'form-control rounded-3', "data-mask": "9999"%>
 			<div id="tickets_number_feedback" class="invalid-feedback"></div>
 		</div>
 	</div>

@@ -1,8 +1,8 @@
 class InstitutionController < ApplicationController
-	before_action :set_institution, only: [:edit, :update, :show, :destroy]
+	before_action :set_institution
+	before_action :clean_params, only: [:create, :update]
 
 	def profile
-		@institution = pundit_user
 		authorize @institution, policy_class: InstitutionPolicy
 	end
 
@@ -16,18 +16,34 @@ class InstitutionController < ApplicationController
 
 	def update
 		authorize @institution
-		if @institution.update(institution_params)
-			flash[:sucess] = "Instituicao atualizado com sucesso"
-			redirect_to institutions_profile_path(@institution)
+
+		# Remove a senha caso o usuario nao informou uma nova
+		if params[:institution][:password] == '' && params[:institution][:password_confirmation] == ''
+			end_params = institution_params_no_password
 		else
-			render 'edit'
+			end_params = institution_params
 		end
+
+		if @institution.update(end_params)
+			redirect_to institution_path, :notice => "Atualizado com sucesso"
+		else
+			respond_to do |format|
+			format.json {render :json => {:model => @institution.class.name.downcase, :error => @institution.errors.as_json}, :status => 422}
+			format.html {render 'edit'}
+			end
+		end	
 	end
 
 	private
 
 	def set_institution
-		@institution = Institution.find(params[:id])
+		@institution = pundit_user
+	end
+
+	def clean_params
+		params[:institution][:zipCode] = params[:institution][:zipCode].tr('^0-9', '')
+		params[:institution][:phone_number] = params[:institution][:phone_number].tr('^0-9', '')
+		params[:institution][:phone_number2] = params[:institution][:phone_number2].tr('^0-9', '')
 	end
 
 	def institution_params
@@ -35,6 +51,7 @@ class InstitutionController < ApplicationController
 			:cnpj,
 			:email,
 			:password,
+			:password_confirmation,
 			:corporate_name,
 			:social_reason,
 			:address,
@@ -42,15 +59,32 @@ class InstitutionController < ApplicationController
 			:complement,
 			:neighborhood,
 			:zipCode,
-			:ddd_phone,
 			:phone_number,
-			:ddd_phone2,
 			:phone_number2,
 			:bank_number,
 			:agency_number,
 			:account_number,
 			:qualification
 			)
+	end
 
+	def institution_params_no_password
+		params.require(:institution).permit(
+			:cnpj,
+			:email,
+			:corporate_name,
+			:social_reason,
+			:address,
+			:number,
+			:complement,
+			:neighborhood,
+			:zipCode,
+			:phone_number,
+			:phone_number2,
+			:bank_number,
+			:agency_number,
+			:account_number,
+			:qualification
+			)
 	end
 end

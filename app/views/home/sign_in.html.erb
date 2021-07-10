@@ -4,7 +4,7 @@
 <div class="row vertical-center">
   <div class="col-md-3"></div>
   <div class="col-md-3 rounded-start square" id="pessoaFisicaLogin">
-    <%= form_with(url: sign_in_user_path, method: "post") do %>
+    <%= form_with(url: sign_in_user_path, method: "post") do |f| %>
     <div class="form-group">
       <div class="text-center"><h2>Pessoa Física</h2></div>
     </div>
@@ -13,7 +13,7 @@
       <%= label :cgc, :title, "CPF", class: "form-label" %>
       <div class="input-group">
         <span class="material-icons input-group-text">account_circle</span>
-        <input type="text" name="cgc" id="cgc" class="form-control">
+        <%= f.text_field :cpf, :class => 'form-control', "placeholder": "___.___.___-__", "data-mask": "000.000.000-00" %>
       </div>
     </div>
 
@@ -21,17 +21,15 @@
       <%= label :password, :title, 'Senha', class: "form-label"%>
       <div class="input-group">
         <span class="material-icons input-group-text">lock</span>
-        <input type="password" name="password" id="password" class="form-control">
+        <%= f.password_field :password, :class => 'form-control' %>
       </div>
     </div>
 
     <div class="row" style="margin-top: 1rem;">
       <div class="col-md-2">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Lembrar
-          </label>
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, "Lembrar", class: "form-check-label" %>
         </div>
       </div>
       <div class="col-md-10 d-flex">
@@ -51,7 +49,7 @@
   </div>
 
   <div class="col-md-3 rounded-end square" id="InstituicaoLogin">
-    <%= form_with(url: sign_in_institution_path, html: { class: "form-horizontal" }, method: "post") do %>
+    <%= form_with(url: sign_in_institution_path, html: { class: "form-horizontal" }, method: "post") do |f| %>
     <div class="form-group">
       <div class="text-center"><h2>Instituição</h2></div>
     </div>
@@ -60,7 +58,7 @@
       <%= label :cgc, :title, "CNPJ", class: "form-label" %>
       <div class="input-group">
         <span class="material-icons input-group-text">account_circle</span>
-        <input type="text" name="cgc" id="cgc" class="form-control">
+        <%= f.text_field :cnpj, :class => 'form-control', "placeholder": "__.___.___/____-__", "data-mask": "00.000.000/0000-00" %>
       </div>
     </div>
 
@@ -68,17 +66,15 @@
       <%= label :password, :title, 'Senha', class: "form-label" %>
       <div class="input-group">
         <span class="material-icons input-group-text">lock</span>
-        <input type="password" name="password" id="password" class="form-control">
+        <%= f.password_field :password, :class => 'form-control' %>
       </div>
     </div>
 
     <div class="row" style="margin-top: 1rem;">
       <div class="col-md-2">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Lembrar
-          </label>
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, "Lembrar", class: "form-check-label" %>
         </div>
       </div>
       <div class="col-md-10 d-flex">

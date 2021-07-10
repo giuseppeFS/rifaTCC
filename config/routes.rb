@@ -12,18 +12,18 @@ Rails.application.routes.draw do
   post 'sign_in_user', to: 'home#access_user'
   post 'sign_in_institution', to: 'home#access_institution'
 
+  get  'raffles', to: 'raffles#index'
+  get  'raffles/:id', to: 'raffles#show'
+
+
   #
   # User acess routes
   #
-  resource :user
-  
-  namespace :user do
-    #
-    # User root
-    #
-    root :to => 'user#profile' 
+  get 'user', controller: 'user', action: 'profile', as: 'user_root'
 
-    get 'tickets', action: :index, controller: 'tickets'
+  resource :user, only: [:destroy, :show, :update, :edit], controller: 'user' do
+    get 'profile'
+    get 'tickets'
   end
 
 
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   namespace :institution do
     resources :raffles do
-      post 'upload'
+
     end
   end
 

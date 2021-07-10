@@ -48,7 +48,6 @@ class Admin::UsersController < ApplicationController
 			respond_to do |format|
 			format.json {render :json => {:model => @user.class.name.downcase, :error => @user.errors.as_json}, :status => 422}
 			format.html {render 'edit'}
-			#flash.now[:danger] = "Não foi possivel criar/alterar usuário"
 			end
 		end		
 	end

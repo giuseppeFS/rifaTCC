@@ -54,6 +54,25 @@ class UserPolicy < ApplicationPolicy
   end
 
   #
+  # User only actions
+  #
+  def profile?
+    if user.instance_of? User 
+      if @user == @record
+        return true
+      end
+    end
+  end
+
+  def tickets?
+    if user.instance_of? User 
+      if @user == @record
+        return true
+      end
+    end
+  end  
+
+  #
   # Open actions
   #
   def create?

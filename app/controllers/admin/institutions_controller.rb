@@ -27,7 +27,6 @@ class Admin::InstitutionsController < ApplicationController
 			respond_to do |format|
 			format.json {render :json => {:model => @institution.class.name.downcase, :error => @institution.errors.as_json}, :status => 422}
 			format.html {render 'new'}
-			#flash.now[:danger] = "Não foi possivel criar/alterar instituição"
 			end
 		end
 	end

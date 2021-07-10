@@ -5,7 +5,7 @@
     <div class="col-md-8">
         <h1 class="text-center">Meu perfil</h1>
         <div id='form_wrap'>
-            <%= render partial: 'shared/institution/form', locals: {model: @institution, url: admin_institution_path(@institution), form_back_page: admin_institutions_path, form_is_edit: true} %>
+            <%= render partial: 'shared/institution/form', locals: {model: @institution, url: institution_path, form_back_page: institution_root_path, form_is_edit: true} %>
         </div>
     </div>
 </div>

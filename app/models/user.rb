@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :wallet
+  has_many :tickets
 
   devise :database_authenticatable,
          :registerable, 

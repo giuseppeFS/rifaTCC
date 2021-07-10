@@ -4,9 +4,13 @@ class Institution::RafflesController < ApplicationController
 	def index
 	  @institution = pundit_user
 
-	  @errors = validate_filters
+	  @validation = validate_filters
 
-	  @raffles = get_filters.paginate(page: params[:page], per_page: 10)
+	  if @validation.empty?
+	  	@raffles = get_filters.paginate(page: params[:page], per_page: 10)
+	  else
+	  	@raffles = @institution.raffles.paginate(page: params[:page], per_page: 10)
+	  end
 	end
 
 	def new
@@ -84,22 +88,6 @@ class Institution::RafflesController < ApplicationController
 		)
 	  end
 
-	  def filter_pararm
-	  	params.require(:raffle).permit(
-        :title,
-        :description,
-        :prize,
-        :prize_description,
-        :category_id,
-        :condition_id,
-        :delivery_type_id,
-        :unit_value,
-        :tickets_number,
-        :draw_date,
-        images:[]
-		)
-	  end
-
 	  def filter_pararms
 	  	params.permit(
         :category_id,
@@ -113,13 +101,13 @@ class Institution::RafflesController < ApplicationController
 	  end
 
 	  def validate_filters
-	  	errors = {model: '', errors: {}}
+	  	errors = {}
 
 	  	if params.key?(:draw_date_initial) && !params[:draw_date_initial].empty?
 	  		begin
 	  			DateTime.strptime(params[:draw_date_initial], '%d/%m/%Y')
 	  		rescue StandardError
-	  			errors[:errors][:draw_date_initial] = "Data inválida"
+	  			errors[:draw_date_initial] = "Data inválida"
 	  		end
 	  	end
 
@@ -127,9 +115,11 @@ class Institution::RafflesController < ApplicationController
 	  		begin
 	  			DateTime.strptime(params[:draw_date_final], '%d/%m/%Y')
 	  		rescue StandardError
-	  			errors[:errors][:draw_date_final] = "Data inválida"
+	  			errors[:draw_date_final] = "Data inválida"
 	  		end
 	  	end
+
+	  	errors
 	  end
 
 	  def get_filters
@@ -151,18 +141,18 @@ class Institution::RafflesController < ApplicationController
 	       !params[:draw_date_initial].empty? && !params[:draw_date_final].empty?
 			result = result.where('draw_date BETWEEN ? AND ? ', DateTime.strptime(params[:draw_date_initial], '%d/%m/%Y'), DateTime.strptime(params[:draw_date_final], '%d/%m/%Y'))
 		elsif params.key?(:draw_date_initial) && !params[:draw_date_initial].empty? 
-			result = result.where('draw_date > ? ', DateTime.strptime(params[:draw_date_initial], '%d/%m/%Y'))
+			result = result.where('draw_date >= ? ', DateTime.strptime(params[:draw_date_initial], '%d/%m/%Y'))
 		elsif params.key?(:draw_date_final) && !params[:draw_date_final].empty?
-			result = result.where('draw_date < ? ', DateTime.strptime(params[:draw_date_final], '%d/%m/%Y'))
+			result = result.where('draw_date <= ? ', DateTime.strptime(params[:draw_date_final], '%d/%m/%Y'))
 	    end
 
 	    if params.key?(:unit_value_min) && params.key?(:unit_value_max) &&
 	       !params[:unit_value_min].empty? && !params[:unit_value_max].empty?
 	    	result = result.where('unit_value BETWEEN ? AND ? ', params[:unit_value_min].to_f, params[:unit_value_max].to_f)
 	    elsif params.key?(:unit_value_min) && !params[:unit_value_min].empty?
-	    	result = result.where('unit_value > ? ', params[:unit_value_min].to_f)
+	    	result = result.where('unit_value >= ? ', params[:unit_value_min].to_f)
 	    elsif params.key?(:unit_value_max) && !params[:unit_value_max].empty?
-	    	result = result.where('unit_value < ? ', params[:unit_value_max].to_f)
+	    	result = result.where('unit_value <= ? ', params[:unit_value_max].to_f)
 	    end
 
 	    result

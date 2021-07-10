@@ -1,4 +1,6 @@
 class Raffle < ApplicationRecord
+  scope :only_active, -> { where('raffle_status_id = ?', 1)}
+
   belongs_to :institution
   has_many :tickets
   has_many_attached :images

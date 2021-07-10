@@ -1,0 +1,69 @@
+<div class="m-2">
+   <%= form_with url: institution_raffles_path, class: 'has-validation-return', local: true, method: :get, id: "raffle_filters" do |f| %>
+   <h5 class="text-center">Filtrar</h5>
+   <label class="form-label mt-1 rmb-1">Categoria</label>
+   <%= collection_select("", :category_id, Category.all, :id, :name, options = {include_blank: 'Todas', :selected => params[:category_id]}, html_options = {class: "form-select rounded-3"}) %>
+   <label class="form-label mt-1 rmb-1">Condição</label>
+   <%= collection_select("", :condition_id, Condition.all, :id, :name, options = {include_blank: 'Todas', :selected => params[:condition_id]}, html_options = {class: "form-select has-validation rounded-3"}) %>
+   <label class="form-label mt-1 rmb-1">Situação</label>
+   <%= collection_select("", :raffle_status_id, RaffleStatus.all, :id, :description, options = {include_blank: 'Todas', :selected => params[:raffle_status_id]}, html_options = {class: "form-select has-validation rounded-3"}) %>
+   <div class="row">
+      <label class="form-label mt-1 rmb-1">Sorteio entre:</label>
+      <div class="col-md-6">
+            <div class="row">
+               <label class="form-label mt-1 rmb-1">Data inicial:</label>
+            </div>
+            <div class="row">
+            <div class="input-group has-validation">
+               <% if !@validation.empty? && @validation.key?(:draw_date_initial) %>
+               <%= f.text_field :draw_date_initial, value: params[:draw_date_initial], :class => 'form-control rounded-3 datepicker is-invalid', "data-mask": "00/00/0000", "placeholder": "__/__/____",  "data-provide" => "datepicker" %>
+               <% else %>
+               <%= f.text_field :draw_date_initial, value: params[:draw_date_initial], :class => 'form-control rounded-3 datepicker', "data-mask": "00/00/0000", "placeholder": "__/__/____",  "data-provide" => "datepicker" %>
+               <% end %>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="row">
+            <label class="form-label mt-1 rmb-1">Data final:</label>
+         </div>
+         <div class="row">
+            <div class="input-group has-validation">
+              <% if !@validation.empty? && @validation.key?(:draw_date_final) %>
+              <%= f.text_field :draw_date_final, value: params[:draw_date_final], :class => 'form-control rounded-3 datepicker is-invalid', "data-mask": "00/00/0000", "placeholder": "__/__/____", "data-provide" => "datepicker" %>
+              <% else %>
+              <%= f.text_field :draw_date_final, value: params[:draw_date_final], :class => 'form-control rounded-3 datepicker', "data-mask": "00/00/0000", "placeholder": "__/__/____", "data-provide" => "datepicker" %>
+              <% end %> 
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <label class="form-label mt-1 rmb-1">Valor da Rifa: </label>
+      <div class="col-md-6">
+         <div class="row">
+            <label class="form-label mt-1 rmb-1">Valor mínimo</label>
+         </div>
+         <div class="row">
+            <div class="input-group has-validation">
+               <span class="input-group-text">R$</span>
+               <%= f.text_field :unit_value_min, value: params[:unit_value_min], :class => 'form-control rounded-3 currency', maxlength: 7, "placeholder": "0,00" %>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="row">
+            <label class="form-label mt-1 rmb-1">Valor mámixo:</label>
+         </div>
+         <div class="row">
+            <div class="input-group has-validation">
+               <span class="input-group-text">R$</span>
+               <%= f.text_field :unit_value_max, value: params[:unit_value_max], :class => 'form-control rounded-3 currency', maxlength: 7, "placeholder": "0,00" %>
+               <div id="draw_date_feedback" class="invalid-feedback"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <%= f.submit "Aplicar", class: "btn btn-submit-adm mt-3"%>
+   <% end %>
+</div>

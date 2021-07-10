@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+	before_action :clean_params, only: [:access_user, :access_institution]
 
 	def home
 		
@@ -13,11 +14,8 @@ class HomeController < ApplicationController
 	end
 
 	def access_user
-		cgc = login_params[:cgc]
-		password = login_params[:password]
-
-		if (CPF.valid?(login_params[:cgc]))
-			@user = User.find_by(cpf: login_params[:cgc])
+		if (CPF.valid?(login_params[:cpf]))
+			@user = User.find_by(cpf: login_params[:cpf])
 
 			if !@user.nil? 
 				if @user.valid_password?(login_params[:password])
@@ -35,11 +33,8 @@ class HomeController < ApplicationController
 	end
 
 	def access_institution
-		cgc = login_params[:cgc]
-		password = login_params[:password]
-			
-		if (CNPJ.valid?(login_params[:cgc]))
-			@institution = Institution.find_by(cnpj: login_params[:cgc])
+		if (CNPJ.valid?(login_params[:cnpj]))
+			@institution = Institution.find_by(cnpj: login_params[:cnpj])
 
 			if !@institution.nil? 
 				if @institution.valid_password?(login_params[:password])
@@ -60,8 +55,15 @@ class HomeController < ApplicationController
 		
 	end
 
+	private
+
 	def login_params
-		params.permit(:cgc, :password, :authenticity_token, :utf8, :commit)
+		params.permit(:cpf, :cnpj, :password, :remember_me, :authenticity_token, :utf8, :commit)
+	end
+
+	def clean_params
+		params[:cpf] = params[:cpf].tr('^0-9', '') if params.key?(:cpf)
+		params[:cnpj] = params[:cnpj].tr('^0-9', '') if params.key?(:cnpj)
 	end
 	
 end

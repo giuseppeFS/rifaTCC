@@ -165,10 +165,9 @@ ActiveRecord::Schema.define(version: 2021_07_08_191821) do
 
   create_table "tickets", force: :cascade do |t|
     t.integer "raffle_id"
+    t.integer "user_id"
     t.integer "number"
-    t.integer "owner_id"
     t.datetime "purchase_date"
-    t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
