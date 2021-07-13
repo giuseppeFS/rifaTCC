@@ -7,9 +7,9 @@ class Institution::RafflesController < ApplicationController
 	  @validation = validate_filters
 
 	  if @validation.empty?
-	  	@raffles = get_filters.paginate(page: params[:page], per_page: 10)
+	  	@raffles = get_filters.page(params[:page])
 	  else
-	  	@raffles = @institution.raffles.paginate(page: params[:page], per_page: 10)
+	  	@raffles = @institution.raffles.page(params[:page])
 	  end
 	end
 

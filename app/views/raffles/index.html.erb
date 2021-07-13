@@ -59,7 +59,7 @@
                               </div>
                               <div class="row">
                               <div class="d-flex justify-content-center ms-3 my-1">
-                                 <%= link_to 'Visualizar'.html_safe, raffles_path(raffle), :class => 'btn btn-action' %>
+                                 <%= link_to 'Visualizar', raffles_show_path(raffle.id), :class => 'btn btn-action' %>
                               </div>
                            </div>
                            </div>
@@ -72,7 +72,7 @@
          <% end %>
       </div>
       <div align="center">
-         <%= will_paginate %>
+         <%= paginate @raffles %>
       </div>
   </div>
    </div>

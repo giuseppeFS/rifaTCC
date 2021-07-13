@@ -32,6 +32,7 @@ $(document).on('turbolinks:load', function(){
   attachFormValidationReturn();
   doDisableFrom();
   doInputFormating();
+  doTicketInitialization();
   doChartInitialization();
   doDropZoneInitialization();
 
@@ -138,6 +139,112 @@ function doChartInitialization(){
       }
     });  
   });
+}
+
+function addTicketOnHold(id){
+  e = document.querySelectorAll('[data-id="' + id + '"]')[0];
+  e.classList.remove ('ticket-open');
+  e.classList.add ('ticket-on-hold');
+  e.setAttribute('data-selected', true);
+}
+
+function addTicketOpen(id){
+  e = document.querySelectorAll('[data-id="' + id + '"]')[0];
+  e.classList.remove ('ticket-on-hold');
+  e.classList.add ('ticket-open');
+  e.setAttribute('data-selected', false);
+}
+
+function getSelectedArray(){
+  try{
+      var selected = sessionStorage.getItem('selected_tickets', '').split(';');
+  }catch{
+      var selected = [];
+  }
+
+  return selected;
+}
+
+function setSelectedTickets(){
+  var selected = getSelectedArray();
+  for(var i = 0; i < selected.length; i++){$('[data-id="' + selected[i] + '"]').each(function(){addTicketOnHold(this.getAttribute('data-id'))})}
+}
+
+function showSelectedTickets(){
+    var selected = getSelectedArray();
+
+    $('#selected_tickets_list').html("");
+
+    for(var i = 0; i < selected.length; i++){
+       if (selected[i] != '') {
+        $('#selected_tickets_list').html(document.getElementById('selected_tickets_list').innerHTML + '<div class="ticket ticket-on-hold" data-id="'+ selected[i] +'" onclick="removeTicketFromList('+selected[i]+');addTicketOpen('+selected[i]+');"><div class="ticket-number text-center">' + selected[i] + '</div></div>');
+       }
+    }
+}
+
+function addTicketToList(id){
+  var selected = getSelectedArray();
+  e = document.querySelectorAll('[data-id="' + id + '"]')[0];
+  selected.push(e.getAttribute('data-id'));
+  for(var i = 0; i < selected.length; i++){if (selected[i] == ''){selected.splice(i, 1);}}
+  sessionStorage.setItem('selected_tickets', selected.join(';'));
+  $('#selected_tickets_hidden').val(selected.join(';'));
+  showSelectedTickets();
+  calculateFinalPrice();
+}
+
+function removeTicketFromList(id){
+  var selected = getSelectedArray();
+  e = document.querySelectorAll('[data-id="' + id + '"]')[0];
+  for(var i = 0; i < selected.length; i++){if (selected[i] === e.getAttribute('data-id')){selected.splice(i, 1);}}
+    for(var i = 0; i < selected.length; i++){if (selected[i] == ''){selected.splice(i, 1);}}
+  sessionStorage.setItem('selected_tickets', selected.join(';'));
+  $('#selected_tickets_hidden').val(selected.join(';'));
+  showSelectedTickets();
+  calculateFinalPrice();
+}
+
+function calculateFinalPrice(){
+  var unitValue = parseFloat($('#unit_value').val());
+  var tickets = getSelectedArray().length
+  $('#final_value').html('R$ '  + (unitValue *  tickets).toFixed(2).replace(/\./g, ','));
+}
+
+function doTicketInitialization(){
+  if ($('#selected_tickets_hidden').length > 0) {
+  $("form.has-error-feedback").bind("ajax:error", function(data){
+    var objResponse = data.detail[0];
+
+    $('#selected_tickets_hidden').val(objResponse.newTicketList);
+    sessionStorage.setItem('selected_tickets', objResponse.newTicketList);
+    showSelectedTickets();
+    calculateFinalPrice();
+
+    $('#error_message').html('Os números: ' + objResponse.alreadyTaken + ' já foram reservados ou comprados e foram removidos da lista');
+  });
+
+
+  var selected = getSelectedArray();
+
+  $('#selected_tickets_hidden').val(selected.join(';'));
+
+  setSelectedTickets();
+  showSelectedTickets();
+  calculateFinalPrice();
+
+  $('.ticket').click(function(e){
+    var selected = getSelectedArray();
+
+    if (this.classList.contains('ticket-open')) {
+      addTicketOnHold(this.getAttribute('data-id'));
+      addTicketToList(this.getAttribute('data-id'));
+    }else{
+      addTicketOpen(this.getAttribute('data-id'));
+      removeTicketFromList(this.getAttribute('data-id'));
+    }
+  });
+
+}
 }
 
 function doInputFormating(){

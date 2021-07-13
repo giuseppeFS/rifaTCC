@@ -4,7 +4,7 @@ class Admin::InstitutionsController < ApplicationController
 
 	def index
 		authorize Institution
-		@institutions = Institution.where(:status => true).paginate(page: params[:page], per_page: 10)
+		@institutions = Institution.where(:status => true).page(params[:page])
 	end
 
 	def show

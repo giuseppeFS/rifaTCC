@@ -2,7 +2,7 @@ class Admin::RafflesController < ApplicationController
 	before_action :set_raffle, only: [:edit, :update, :show, :destroy]
 
 	def index
-	  @raffles = Raffle.paginate(page: params[:page], per_page: 10)
+	  @raffles = Raffle.page(params[:page])
 	end
 
 	def new

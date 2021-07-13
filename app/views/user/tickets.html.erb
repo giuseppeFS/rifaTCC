@@ -1,6 +1,9 @@
 <div class="row">
    <div id="sidebar_wrap" class="col-md-3">
       <div class="row">
+         <%= render 'layouts/navigation/sidebar_menu' %>
+      </div>
+      <div class="row">
       <%= render 'layouts/navigation/sidebar_menu_filters' %>
       </div>
    </div>
@@ -72,7 +75,7 @@
          <% end %>
       </div>
       <div align="center">
-         <%= will_paginate @raffles %>
+         <%= paginate @raffles %>
       </div>
   </div>
    </div>

@@ -35,9 +35,9 @@ class UserController < ApplicationController
 		@validation = validate_filters
 
 	    if @validation.empty?
-	    	@raffles = get_filters.paginate(page: params[:page], per_page: 10)
+	    	@raffles = get_filters.page(params[:page])
 	    else
-	    	@raffles = Raffle.joins(:tickets).where(tickets: {user: @user}).paginate(page: params[:page], per_page: 10)
+	    	@raffles = Raffle.joins(:tickets).where(tickets: {user: @user}).page(params[:page])
 	    end
 	end
 

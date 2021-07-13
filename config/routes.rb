@@ -12,8 +12,13 @@ Rails.application.routes.draw do
   post 'sign_in_user', to: 'home#access_user'
   post 'sign_in_institution', to: 'home#access_institution'
 
-  get  'raffles', to: 'raffles#index'
-  get  'raffles/:id', to: 'raffles#show'
+  get 'raffles', to: 'raffles#index'
+  get 'raffles/:id', to: 'raffles#show', as: :raffles_show
+  get 'raffles/:id/buy', to: 'raffles#buy', as: :raffles_buy
+  get 'raffles/:id/checkout', to: 'raffles#checkout', as: :raffles_checkout
+  post 'raffles/:id/check_tickets', to: 'raffles#check_tickets', as: :raffles_check_tickets
+
+  #match "raffles/:id/checkout" => "raffles#checkout", as: :raffles_checkout, via: [:get, :post]
 
 
   #

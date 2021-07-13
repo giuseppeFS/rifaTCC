@@ -3,6 +3,7 @@ class Raffle < ApplicationRecord
 
   belongs_to :institution
   has_many :tickets
+  has_one :winner_ticket
   has_many_attached :images
   belongs_to :category
   belongs_to :condition

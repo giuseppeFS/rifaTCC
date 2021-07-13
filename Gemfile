@@ -45,7 +45,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap', '~> 5.0.1'
 
 # Paginacao para listagem
-gem 'will_paginate-bootstrap4'
+gem 'kaminari'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

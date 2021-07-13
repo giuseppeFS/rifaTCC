@@ -1,13 +1,14 @@
 class RafflesController < ApplicationController
-	before_action :set_raffle, only: [:edit, :update, :show, :destroy]
+	before_action :set_user
+	before_action :set_raffle, only: [:show, :buy, :check_tickets, :checkout]
 
 	def index
 	  @validation = validate_filters
 
 	  if @validation.empty?
-	  	@raffles = get_filters.paginate(page: params[:page], per_page: 10)
+	  	@raffles = get_filters.page(params[:page])
 	  else
-	  	@raffles = Raffle.only_active.paginate(page: params[:page], per_page: 10)
+	  	@raffles = Raffle.only_active.page(params[:page])
 	  end
 	end
 
@@ -15,8 +16,93 @@ class RafflesController < ApplicationController
 	  
 	end
 
+	def buy
+	  @tickets = @raffle.tickets.only_owned(@user)
+
+	  if (!@tickets.empty?)
+	  	redirect_to raffles_checkout_path(@raffle)
+	  else
+	  	@tickets = @raffle.tickets.only_open.page(params[:page])
+	  end
+	end
+
+	def check_tickets
+		#
+		# Lista de numeros a serem verificados
+		#
+		ticket_list = params[:selected_tickets_hidden].split(';')
+
+		#
+		# Lista de numeros que ja foram pegos
+		#
+		alreadyTakenList = []
+
+		#
+		# Lista dos tickets realmente encontrados via params
+		#
+		ticketsFound = []
+
+		ticket_list.each_with_index do |v,i|
+			#
+			# Tenta buscar se o numero realmente e valido
+			#
+			t = @raffle.tickets.where('number = ?', v).first
+			if (!t.nil?)
+				#
+				# Caso encontre, coloca na lista de encontrados
+				#
+				ticketsFound << t
+				if !t.open?
+				  #
+				  # Caso esteja ocupado, zera o valor e adiciona o numero na lista ṕara informar o usuario
+				  #
+				  ticket_list[i] = '';
+				  alreadyTakenList.push(v)
+				end
+			else
+				#
+				# numero nao valido, remove
+				#
+				ticket_list[i] = '';
+			end
+		end
+
+		#
+		# Remove os invalidos da lista
+		#
+		ticket_list.delete("");
+
+		#
+		# Caso o numero que o usuario informou foi pego no caminho, retira da lista e informa
+		#
+		if (alreadyTakenList != [])
+			respond_to do |format|
+			format.json {render :json => {:newTicketList => ticket_list.join(';'), :alreadyTaken => alreadyTakenList.join(',')}, :status => 422}
+			format.html {render 'buy'}
+			end
+		else
+			#
+			# Se chegou aqui, seta os numeros como on_hold_session e com o id od usuario para checkout
+			#
+			ticketsFound.each do |t|
+				t.user_id = @user.id
+				t.ticket_status_id = 2
+				t.save()
+			end
+
+			redirect_to raffles_checkout_path(@raffle)
+		end
+	end
+
+	def checkout
+
+	end
 
 	private
+
+	  def set_user
+	  	@user = pundit_user
+	  end
 
 	  def set_raffle
 	  	@raffle = Raffle.find(params[:id])
