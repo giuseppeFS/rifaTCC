@@ -35,7 +35,7 @@ gem 'chart-js-rails'
 gem 'dropzonejs-rails'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 
 # Icones Material Design
 gem 'material_icons'
